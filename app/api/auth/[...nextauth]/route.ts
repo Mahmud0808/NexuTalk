@@ -25,7 +25,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          throw new Error("Email and password required.");
         }
 
         const user = await prisma.user.findUnique({
@@ -35,9 +35,9 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user) {
-          throw new Error("Invalid credentials");
+          throw new Error("Email or password invalid.");
         } else if (!user?.hashedPassword) {
-          throw new Error("Continue with Google or GitHub");
+          throw new Error("Continue with Google or GitHub.");
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -46,18 +46,26 @@ export const authOptions: AuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Invalid credentials");
+          throw new Error("Email or password invalid.");
         }
 
         return user;
       },
     }),
   ],
-  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
+    maxAge: 1 * 24 * 60 * 60, // 1 day
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_JWT_SECRET,
+  },
+  pages: {
+    signIn: "/",
+    newUser: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === "development",
 };
 
 const handler = NextAuth(authOptions);

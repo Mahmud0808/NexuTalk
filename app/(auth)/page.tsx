@@ -13,8 +13,8 @@ export default function Home() {
         </h1>
         <p className="text-white text-xl font-light mt-16 lg:max-w-[90%] xl:max-w-2xl">
           Join NexuTalk for seamless communication and collaboration. Create
-          channels, chat in real-time, and stay connected with your team. Sign
-          up now!
+          channels, chat in real-time, and stay connected with your team. Join
+          now!
         </p>
       </div>
       <div className="flex flex-1 min-h-full flex-col justify-center py-16 px-6 lg:px-8 bg-slate-100">
