@@ -11,7 +11,7 @@ export default function Home() {
         <h1 className="text-white text-4xl font-medium mt-8">
           Connect, Communicate & Collaborate
         </h1>
-        <p className="text-white text-xl font-light mt-16 lg:max-w-[90%] xl:max-w-[80%]">
+        <p className="text-white text-xl font-light mt-16 lg:max-w-[90%] xl:max-w-2xl">
           Join NexuTalk for seamless communication and collaboration. Create
           channels, chat in real-time, and stay connected with your team. Sign
           up now!
