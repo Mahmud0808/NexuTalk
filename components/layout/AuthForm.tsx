@@ -13,6 +13,7 @@ import { toast } from "../ui/use-toast";
 import AuthSocialButton from "./AuthSocialButton";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
+import Image from "next/image";
 
 const AuthForm = () => {
   const [variant, setVariant] = useState<AuthVariant>("LOGIN");
@@ -73,87 +74,98 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="mt-8 mx-auto w-full max-w-md">
-      <div className="bg-white px-4 py-8 shadow rounded-lg md:rounded-xl sm:px-10">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {variant === "REGISTER" && (
+    <>
+      <div className="mx-auto w-full max-w-md flex flex-col justify-center items-center gap-3">
+        <Image src="/images/logo.png" alt="Logo" width={48} height={48} />
+        <h2 className="text-3xl font-semibold tracking-tight text-gray-900">
+          {variant === "LOGIN"
+            ? "Sign in to your account"
+            : "Create an account"}
+        </h2>
+      </div>
+      <div className="mt-8 mx-auto w-full max-w-md">
+        <div className="bg-white px-4 py-8 shadow rounded-xl sm:px-10">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {variant === "REGISTER" && (
+                <CustomInput
+                  control={form.control}
+                  name="userName"
+                  type="text"
+                  label="Full Name"
+                  disabled={isLoading}
+                />
+              )}
               <CustomInput
                 control={form.control}
-                name="userName"
-                type="text"
-                label="Full Name"
+                name="email"
+                type="email"
+                label="Email address"
                 disabled={isLoading}
               />
-            )}
-            <CustomInput
-              control={form.control}
-              name="email"
-              type="email"
-              label="Email"
-              disabled={isLoading}
-            />
-            <CustomInput
-              control={form.control}
-              name="password"
-              type="password"
-              label="Password"
-              disabled={isLoading}
-            />
-            <CustomButton type="submit" disabled={isLoading} fullWidth={true}>
-              {" "}
-              {isLoading ? (
-                <>
-                  Please wait &nbsp; <Loader2 className="size-5 animate-spin" />
-                </>
-              ) : (
-                <>{variant === "LOGIN" ? "Login" : "Register"}</>
-              )}
-            </CustomButton>
-          </form>
-        </Form>
+              <CustomInput
+                control={form.control}
+                name="password"
+                type="password"
+                label="Password"
+                disabled={isLoading}
+              />
+              <CustomButton type="submit" disabled={isLoading} fullWidth={true}>
+                {" "}
+                {isLoading ? (
+                  <>
+                    Please wait &nbsp;{" "}
+                    <Loader2 className="size-5 animate-spin" />
+                  </>
+                ) : (
+                  <>{variant === "LOGIN" ? "Login" : "Register"}</>
+                )}
+              </CustomButton>
+            </form>
+          </Form>
 
-        <div className="mt-6">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-white px-2 text-gray-500">
+                  Or continue with
+                </span>
+              </div>
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">
-                Or continue with
-              </span>
-            </div>
-          </div>
 
-          <div className="mt-6 flex gap-2">
-            <AuthSocialButton
-              icon={FcGoogle}
-              text="Google"
-              onClick={() => socialAction("google")}
-            />
-            <AuthSocialButton
-              icon={FaGithub}
-              text="GitHub"
-              onClick={() => socialAction("github")}
-            />
+            <div className="mt-6 flex gap-2">
+              <AuthSocialButton
+                icon={FcGoogle}
+                text="Google"
+                onClick={() => socialAction("google")}
+              />
+              <AuthSocialButton
+                icon={FaGithub}
+                text="GitHub"
+                onClick={() => socialAction("github")}
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex justify-center text-sm mt-6 px-2 text-gray-500">
-          <div>
-            {variant === "LOGIN"
-              ? "Don't have an account?"
-              : "Already have an account?"}
-          </div>
-          &nbsp;
-          <div
-            onClick={toggleVariant}
-            className="underline cursor-pointer text-sky-500"
-          >
-            {variant === "LOGIN" ? "Register" : "Login"}
+          <div className="flex justify-center text-sm mt-6 px-2 text-gray-500">
+            <div>
+              {variant === "LOGIN"
+                ? "Don't have an account?"
+                : "Already have an account?"}
+            </div>
+            &nbsp;
+            <div
+              onClick={toggleVariant}
+              className="underline cursor-pointer text-sky-500"
+            >
+              {variant === "LOGIN" ? "Register" : "Login"}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
