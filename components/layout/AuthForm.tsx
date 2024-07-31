@@ -76,15 +76,21 @@ const AuthForm = () => {
   return (
     <>
       <div className="mx-auto w-full max-w-md flex flex-col justify-center items-center gap-3">
-        <Image src="/images/logo.png" alt="Logo" width={48} height={48} />
-        <h2 className="text-3xl font-semibold tracking-tight text-gray-900">
+        <div className="flex justify-center items-center gap-2">
+          <Image src="/images/logo.png" alt="Logo" width={48} height={48} />
+          <h3 className="text-2xl tracking-wide lg:hidden">
+            <span className="font-normal">nexu</span>
+            <span className="font-bold">talk</span>
+          </h3>
+        </div>
+        <h2 className="text-2xl lg:text-3xl font-semibold tracking-tight text-gray-900">
           {variant === "LOGIN"
             ? "Sign in to your account"
-            : "Create an account"}
+            : "Let's create an account"}
         </h2>
       </div>
       <div className="mt-8 mx-auto w-full max-w-md">
-        <div className="bg-white px-4 py-8 shadow rounded-xl sm:px-10">
+        <div className="bg-white px-6 py-8 shadow rounded-xl sm:px-10">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {variant === "REGISTER" && (
