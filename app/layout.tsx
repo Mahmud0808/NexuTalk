@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthContext>
-          <main>{children}</main>
+          <main className="h-full">{children}</main>
           <Toaster />
         </AuthContext>
       </body>
