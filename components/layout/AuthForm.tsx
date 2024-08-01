@@ -4,7 +4,7 @@ import { z } from "zod";
 import axios from "axios";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomInput from "../common/CustomInput";
 import CustomButton from "../common/CustomButton";
@@ -14,13 +14,23 @@ import { toast } from "../ui/use-toast";
 import AuthSocialButton from "./AuthSocialButton";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const AuthForm = () => {
+  const session = useSession();
+  const router = useRouter();
   const [variant, setVariant] = useState<AuthVariant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
   const [isSocialLoading, setIsSocialLoading] = useState(false);
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.push("/users");
+      console.log("Authenticated", session);
+    }
+  }, [session?.status]);
 
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {
@@ -54,10 +64,21 @@ const AuthForm = () => {
       axios
         .post("/api/register", userData)
         .then(() => {
-          toast({
-            title: "Success!",
-            description: "You are now registered.",
-          });
+          signIn("credentials", userData)
+            .then((callback) => {
+              if (callback?.error) {
+                toast({
+                  title: "Uh Oh! Something went wrong.",
+                  description: callback.error,
+                  variant: "destructive",
+                });
+              }
+
+              if (callback?.ok && !callback?.error) {
+                router.push("/users");
+              }
+            })
+            .finally(() => setIsLoading(false));
         })
         .catch((err) => {
           toast({
@@ -84,10 +105,7 @@ const AuthForm = () => {
           }
 
           if (callback?.ok && !callback?.error) {
-            toast({
-              title: "Success!",
-              description: "You are now logged in.",
-            });
+            router.push("/users");
           }
         })
         .finally(() => setIsLoading(false));
