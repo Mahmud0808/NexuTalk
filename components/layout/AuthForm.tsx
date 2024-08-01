@@ -1,7 +1,8 @@
 "use client";
 
-import { Form } from "@/components/ui/form";
 import { z } from "zod";
+import axios from "axios";
+import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,11 +14,13 @@ import { toast } from "../ui/use-toast";
 import AuthSocialButton from "./AuthSocialButton";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 
 const AuthForm = () => {
   const [variant, setVariant] = useState<AuthVariant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSocialLoading, setIsSocialLoading] = useState(false);
 
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {
@@ -42,35 +45,76 @@ const AuthForm = () => {
     setIsLoading(true);
 
     const userData = {
-      userName: values.userName!,
+      name: values.userName!,
       email: values.email,
       password: values.password,
     };
 
-    try {
-      if (variant === "REGISTER") {
-        // sign-up
-      }
+    if (variant === "REGISTER") {
+      axios
+        .post("/api/register", userData)
+        .then(() => {
+          toast({
+            title: "Success!",
+            description: "You are now registered.",
+          });
+        })
+        .catch((err) => {
+          toast({
+            title: "Uh Oh! Something went wrong.",
+            description: err.response.data,
+            variant: "destructive",
+          });
+        })
+        .finally(() => setIsLoading(false));
+    }
 
-      if (variant === "LOGIN") {
-        // login
-      }
-    } catch (err: any) {
-      toast({
-        title: "Uh Oh! Something went wrong.",
-        description: err.message,
-        variant: "destructive",
-        className: "bg-white",
-      });
+    if (variant === "LOGIN") {
+      signIn("credentials", {
+        ...userData,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast({
+              title: "Uh Oh! Something went wrong.",
+              description: callback.error,
+              variant: "destructive",
+            });
+          }
 
-      setIsLoading(false);
+          if (callback?.ok && !callback?.error) {
+            toast({
+              title: "Success!",
+              description: "You are now logged in.",
+            });
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
   const socialAction = (action: string) => {
-    setIsLoading(true);
+    setIsSocialLoading(true);
 
-    // social sign-in buttons
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast({
+            title: "Uh Oh! Something went wrong.",
+            description: callback.error,
+            variant: "destructive",
+          });
+        }
+
+        if (callback?.ok && !callback?.error) {
+          toast({
+            title: "Success!",
+            description: "You are now logged in.",
+          });
+        }
+      })
+      .finally(() => setIsSocialLoading(false));
   };
 
   return (
@@ -99,7 +143,8 @@ const AuthForm = () => {
                   name="userName"
                   type="text"
                   label="Full Name"
-                  disabled={isLoading}
+                  placeholder="John Doe"
+                  disabled={isLoading || isSocialLoading}
                 />
               )}
               <CustomInput
@@ -107,21 +152,27 @@ const AuthForm = () => {
                 name="email"
                 type="email"
                 label="Email address"
-                disabled={isLoading}
+                placeholder="example@gmail.com"
+                disabled={isLoading || isSocialLoading}
               />
               <CustomInput
                 control={form.control}
                 name="password"
                 type="password"
                 label="Password"
-                disabled={isLoading}
+                placeholder="********"
+                disabled={isLoading || isSocialLoading}
               />
-              <CustomButton type="submit" disabled={isLoading} fullWidth={true}>
+              <CustomButton
+                type="submit"
+                disabled={isLoading || isSocialLoading}
+                fullWidth={true}
+              >
                 {" "}
                 {isLoading ? (
                   <>
-                    Please wait &nbsp;{" "}
                     <Loader2 className="size-5 animate-spin" />
+                    &nbsp;Loading
                   </>
                 ) : (
                   <>{variant === "LOGIN" ? "Login" : "Register"}</>
@@ -146,11 +197,13 @@ const AuthForm = () => {
               <AuthSocialButton
                 icon={FcGoogle}
                 text="Google"
+                disabled={isLoading || isSocialLoading}
                 onClick={() => socialAction("google")}
               />
               <AuthSocialButton
                 icon={FaGithub}
                 text="GitHub"
+                disabled={isLoading || isSocialLoading}
                 onClick={() => socialAction("github")}
               />
             </div>
