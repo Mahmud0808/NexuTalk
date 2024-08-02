@@ -18,11 +18,17 @@ export default withAuth({
         return pathname === "/";
       }
 
-      return pathname.startsWith("/users") || pathname === "/icon.ico";
+      return (
+        pathname.startsWith("/users") || pathname.startsWith("/conversations")
+      );
     },
   },
 });
 
 export const config = {
-  matcher: ["/users/:path*"],
+  matcher: [
+    "/users/:path*",
+    "/conversations/:path*",
+    "/((?!api|_next/static|_next/image|assets|images|icon.ico|favicon.ico).*)",
+  ],
 };

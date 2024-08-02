@@ -7,12 +7,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import clsx from "clsx";
 import ConversationListItem from "../common/ConversationListItem";
+import { User } from "@prisma/client";
 
 interface ConversationListProps {
   initialItems: PopulatedConversationType[];
+  currentUser: User;
 }
 
-const ConversationList = ({ initialItems }: ConversationListProps) => {
+const ConversationList = ({ initialItems, currentUser }: ConversationListProps) => {
   const router = useRouter();
   const [items, setItems] = useState(initialItems);
   const { isOpen, conversationId } = useConversation();
@@ -36,7 +38,8 @@ const ConversationList = ({ initialItems }: ConversationListProps) => {
         {items.map((item) => (
           <ConversationListItem
             key={item.id}
-            data={item}
+            conversation={item}
+            currentUser={currentUser}
             selected={conversationId?.id === item.id}
           />
         ))}

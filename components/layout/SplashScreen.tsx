@@ -9,6 +9,7 @@ const SplashScreen = () => {
         alt=""
         width={60}
         height={60}
+        unoptimized={true}
       />
       <h3 className="text-black text-3xl tracking-wide">
         <span className="font-light">nexu</span>

@@ -3,20 +3,21 @@ import { PopulatedConversationType } from "../types";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
 
-const useOtherUsers = (
-  conversation: PopulatedConversationType | { users: User[] }
-) => {
-  const session = useSession();
+interface UseOtherUsersProps {
+  conversation: PopulatedConversationType | { users: User[] };
+  excludedUser: User;
+}
 
+const useOtherUsers = ({ conversation, excludedUser }: UseOtherUsersProps) => {
   const otherUsers = useMemo(() => {
-    const currentUserEmail = session.data?.user?.email;
+    const currentUserEmail = excludedUser.email;
 
     const otherUsers = conversation.users.filter(
       (user) => user.email !== currentUserEmail
     );
 
     return otherUsers;
-  }, [session.data?.user?.email, conversation.users]);
+  }, [excludedUser.email, conversation.users]);
 
   return otherUsers;
 };

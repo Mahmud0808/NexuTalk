@@ -6,33 +6,34 @@ import useOtherUsers from "@/lib/hooks/useOtherUsers.hooks";
 import { useSession } from "next-auth/react";
 import clsx from "clsx";
 import UserAvatar from "./UserAvatar";
+import { User } from "@prisma/client";
 
 interface ConversationListItemProps {
-  data: PopulatedConversationType;
+  conversation: PopulatedConversationType;
   selected?: boolean;
+  currentUser: User;
 }
 
 const ConversationListItem = ({
-  data,
+  conversation,
   selected,
+  currentUser,
 }: ConversationListItemProps) => {
   const router = useRouter();
-  const session = useSession();
-  const otherUsers = useOtherUsers(data);
+  const otherUsers = useOtherUsers({
+    conversation: conversation,
+    excludedUser: currentUser,
+  });
 
   const handleClick = useCallback(() => {
-    router.push(`/conversations/${data.id}`);
-  }, [data.id, router]);
-
-  const userEmail = useMemo(() => {
-    return session?.data?.user?.email;
-  }, [session?.data?.user?.email]);
+    router.push(`/conversations/${conversation.id}`);
+  }, [conversation.id, router]);
 
   const lastMessage = useMemo(() => {
-    const messages = data.messages || [];
+    const messages = conversation.messages || [];
 
     return messages[messages.length - 1];
-  }, [data.messages]);
+  }, [conversation.messages]);
 
   const lastMessageText = useMemo(() => {
     if (lastMessage?.image) {
@@ -47,21 +48,17 @@ const ConversationListItem = ({
   }, [lastMessage]);
 
   const hasSeen = useMemo(() => {
-    if (lastMessageText === "Started a conversation") {
+    if (!lastMessage) {
       return true;
-    }
-
-    if (!lastMessage || !userEmail) {
-      return false;
     }
 
     const seenArray = lastMessage.seen || [];
 
     return (
-      seenArray.filter((user) => user.email === userEmail).length !== 0 ||
-      lastMessage.sender.email === userEmail
+      seenArray.filter((user) => user.email === currentUser.email).length !==
+        0 || lastMessage.sender.email === currentUser.email
     );
-  }, [userEmail, lastMessage]);
+  }, [currentUser.email, lastMessage]);
 
   return (
     <div
@@ -75,7 +72,7 @@ const ConversationListItem = ({
       <div className="min-w-0 flex-1 mb-1">
         <div className="flex justify-between items-center">
           <div className="truncate text-base font-semibold text-gray-900 flex-1">
-            {data.name || otherUsers[0].name}
+            {conversation.name || otherUsers[0].name}
           </div>
           {lastMessage?.createdAt && (
             <div className="text-xs text-gray-400 font-light">
@@ -86,7 +83,7 @@ const ConversationListItem = ({
         <div
           className={clsx(
             "truncate text-sm",
-            hasSeen ? "text-gray-500" : "text-black font-semibold"
+            hasSeen || selected ? "text-gray-500" : "text-black font-semibold"
           )}
         >
           {lastMessageText}
