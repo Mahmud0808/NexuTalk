@@ -8,7 +8,6 @@ import {
   TransitionChild,
   Dialog,
   DialogPanel,
-  DialogTitle,
 } from "@headlessui/react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import UserAvatar from "../common/UserAvatar";
@@ -53,11 +52,7 @@ const ChatDrawer = ({
         isOpen={isModalOpen}
         onClose={() => setModalIsOpen(false)}
         conversationId={conversation.id}
-      >
-        <div className="bg-white p-5">
-          <p>Are you sure you want to delete this conversation?</p>
-        </div>
-      </ConfirmDialog>
+      />
       <Transition show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={onClose}>
           <TransitionChild
@@ -104,9 +99,7 @@ const ChatDrawer = ({
                         <div className="mb-2">
                           <UserAvatar user={otherUsers[0]} size="lg" />
                         </div>
-                        <DialogTitle>
-                          <div className="font-semibold">{title}</div>
-                        </DialogTitle>
+                        <div className="font-semibold">{title}</div>
                         <div className="text-sm text-gray-500">
                           {statusText}
                         </div>

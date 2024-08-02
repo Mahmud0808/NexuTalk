@@ -14,7 +14,10 @@ export default async function ConversationsLayout({
   return (
     <Sidebar>
       <div className="h-full">
-        <ConversationList initialItems={conversations} currentUser={currentUser} />
+        <ConversationList
+          initialItems={conversations}
+          currentUser={currentUser!}
+        />
         {children}
       </div>
     </Sidebar>
