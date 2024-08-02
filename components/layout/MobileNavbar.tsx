@@ -1,7 +1,7 @@
 "use client";
 
-import useConversation from "@/lib/hooks/useConversation";
-import useRoutes from "@/lib/hooks/useRoutes";
+import useConversation from "@/lib/hooks/useConversation.hooks";
+import useRoutes from "@/lib/hooks/useRoutes.hooks";
 import MobileNavbarItem from "../common/MobileNavbarItem";
 
 const MobileNavbar = () => {

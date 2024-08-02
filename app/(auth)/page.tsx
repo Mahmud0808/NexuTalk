@@ -1,6 +1,36 @@
-import AuthForm from "../../components/layout/AuthForm";
+"use client";
 
-export default function Home() {
+import { useSession } from "next-auth/react";
+import AuthForm from "../../components/layout/AuthForm";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import SplashScreen from "@/components/layout/SplashScreen";
+
+export default function page() {
+  const session = useSession();
+  const router = useRouter();
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (session?.status === "authenticated") {
+      timer = setTimeout(() => {
+        router.push("/users");
+      }, 1200);
+    } else if (session?.status === "unauthenticated") {
+      timer = setTimeout(() => {
+        setShowSplash(false);
+      }, 1200);
+    }
+
+    return () => clearTimeout(timer);
+  }, [session?.status]);
+
+  if (showSplash) {
+    return <SplashScreen />;
+  }
+
   return (
     <div className="flex min-h-screen min-w-full justify-center">
       <div className="flex-1 min-h-full flex-col justify-center py-16 px-8 lg:px-12 xl:px-24 bg-primary hidden lg:flex">

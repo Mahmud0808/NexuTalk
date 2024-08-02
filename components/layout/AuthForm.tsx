@@ -4,33 +4,25 @@ import { z } from "zod";
 import axios from "axios";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomInput from "../common/CustomInput";
 import CustomButton from "../common/CustomButton";
-import { AuthFormSchema, AuthVariant } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { toast } from "../ui/use-toast";
 import AuthSocialButton from "./AuthSocialButton";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { AuthFormSchema, AuthVariant } from "@/lib/schema/auth.schema";
 
 const AuthForm = () => {
-  const session = useSession();
   const router = useRouter();
   const [variant, setVariant] = useState<AuthVariant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
   const [isSocialLoading, setIsSocialLoading] = useState(false);
-
-  useEffect(() => {
-    if (session?.status === "authenticated") {
-      router.push("/users");
-      console.log("Authenticated", session);
-    }
-  }, [session?.status]);
 
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {

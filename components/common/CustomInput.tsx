@@ -8,7 +8,7 @@ import {
 import { z } from "zod";
 import { Input } from "../ui/input";
 import { Control, FieldPath } from "react-hook-form";
-import { AuthFormSchema } from "@/lib/utils";
+import { AuthFormSchema } from "@/lib/schema/auth.schema";
 
 const formSchema = AuthFormSchema("REGISTER");
 

@@ -1,6 +1,6 @@
 "use client";
 
-import useRoutes from "@/lib/hooks/useRoutes";
+import useRoutes from "@/lib/hooks/useRoutes.hooks";
 import { useState } from "react";
 import DesktopSidebarItem from "../common/DesktopSidebarItem";
 import { User } from "@prisma/client";

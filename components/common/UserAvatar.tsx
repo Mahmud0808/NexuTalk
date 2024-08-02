@@ -15,7 +15,7 @@ const UserAvatar = ({ user }: UserAvatarProps) => {
           src={user?.image || "/images/placeholder_profile_picture.png"}
         />
       </div>
-      <span className="absolute block rounded-full bg-green-500 ring-2 ring-white top-0 right-0 h-2 w-2 md:h-3 md:w-3" />
+      <span className="absolute block rounded-full bg-green-500 ring-2 ring-white top-0 right-0 h-2 w-2 md:h-[10px] md:w-[10px]" />
     </div>
   );
 };
