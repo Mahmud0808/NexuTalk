@@ -1,5 +1,6 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser.actions";
 import prismadb from "@/lib/database/prismadb";
+import { pusherServer } from "@/lib/utility/pusher";
 import { NextResponse } from "next/server";
 
 interface ParamProps {
@@ -56,6 +57,19 @@ export async function POST(req: Request, { params }: { params: ParamProps }) {
         },
       },
     });
+
+    await pusherServer.trigger(currentUser.email, "conversation:update", {
+      id: existingConversation.id,
+      messages: [updatedMessage],
+    });
+
+    if (lastMessage.seenIds.indexOf(currentUser.id) === -1) {
+      await pusherServer.trigger(
+        conversationId!,
+        "messages:update",
+        updatedMessage
+      );
+    }
 
     return NextResponse.json(updatedMessage);
   } catch (error) {
