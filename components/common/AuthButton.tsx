@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 export type ButtonTypes = "submit" | "reset" | "button" | undefined;
 
-interface CustomButtonProps {
+interface AuthButtonProps {
   type: ButtonTypes;
   disabled?: boolean;
   fullWidth?: boolean;
@@ -14,7 +14,7 @@ interface CustomButtonProps {
   onClick?: () => void;
 }
 
-const CustomButton = ({
+const AuthButton = ({
   type,
   disabled = false,
   fullWidth = false,
@@ -22,7 +22,7 @@ const CustomButton = ({
   danger = false,
   onClick,
   children,
-}: CustomButtonProps) => {
+}: AuthButtonProps) => {
   const handleClick = () => {
     if (onClick) {
       onClick();
@@ -46,4 +46,4 @@ const CustomButton = ({
   );
 };
 
-export default CustomButton;
+export default AuthButton;

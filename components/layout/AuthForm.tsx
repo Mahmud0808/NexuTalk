@@ -6,8 +6,6 @@ import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import CustomInput from "../common/CustomInput";
-import CustomButton from "../common/CustomButton";
 import { Loader2 } from "lucide-react";
 import { toast } from "../ui/use-toast";
 import AuthSocialButton from "./AuthSocialButton";
@@ -17,6 +15,8 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AuthFormSchema, AuthVariant } from "@/lib/schema/auth.schema";
+import AuthInput from "../common/AuthInput";
+import AuthButton from "../common/AuthButton";
 
 const AuthForm = () => {
   const router = useRouter();
@@ -148,7 +148,7 @@ const AuthForm = () => {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {variant === "REGISTER" && (
-                <CustomInput
+                <AuthInput
                   control={form.control}
                   name="username"
                   type="text"
@@ -157,7 +157,7 @@ const AuthForm = () => {
                   disabled={isLoading || isSocialLoading}
                 />
               )}
-              <CustomInput
+              <AuthInput
                 control={form.control}
                 name="email"
                 type="email"
@@ -165,7 +165,7 @@ const AuthForm = () => {
                 placeholder="example@gmail.com"
                 disabled={isLoading || isSocialLoading}
               />
-              <CustomInput
+              <AuthInput
                 control={form.control}
                 name="password"
                 type="password"
@@ -173,7 +173,7 @@ const AuthForm = () => {
                 placeholder="********"
                 disabled={isLoading || isSocialLoading}
               />
-              <CustomButton
+              <AuthButton
                 type="submit"
                 disabled={isLoading || isSocialLoading}
                 fullWidth={true}
@@ -187,7 +187,7 @@ const AuthForm = () => {
                 ) : (
                   <>{variant === "LOGIN" ? "Login" : "Register"}</>
                 )}
-              </CustomButton>
+              </AuthButton>
             </form>
           </Form>
 

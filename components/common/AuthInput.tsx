@@ -12,7 +12,7 @@ import { AuthFormSchema } from "@/lib/schema/auth.schema";
 
 const formSchema = AuthFormSchema("REGISTER");
 
-interface CustomInputProps {
+interface AuthInputProps {
   control: Control<z.infer<typeof formSchema>>;
   name: FieldPath<z.infer<typeof formSchema>>;
   type: string;
@@ -21,14 +21,14 @@ interface CustomInputProps {
   disabled?: boolean;
 }
 
-const CustomInput = ({
+const AuthInput = ({
   control,
   name,
   type,
   label,
   placeholder = "",
   disabled = false,
-}: CustomInputProps) => {
+}: AuthInputProps) => {
   return (
     <FormField
       control={control}
@@ -57,4 +57,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default AuthInput;

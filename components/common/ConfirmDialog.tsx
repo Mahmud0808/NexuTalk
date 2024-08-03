@@ -13,9 +13,9 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import CustomButton from "./CustomButton";
 import { HiTrash } from "react-icons/hi2";
 import { Loader2 } from "lucide-react";
+import AuthButton from "./AuthButton";
 
 interface ConfirmDialogProps {
   isOpen: boolean;
@@ -71,7 +71,7 @@ const ConfirmDialog = ({
         </div>
       </div>
       <div className="mt-5 sm:mt-4 flex flex-row-reverse gap-2">
-        <CustomButton
+        <AuthButton
           type="button"
           disabled={isLoading}
           onClick={onDelete}
@@ -83,15 +83,15 @@ const ConfirmDialog = ({
             <HiTrash size={18} className="mr-2" />
           )}
           Delete
-        </CustomButton>
-        <CustomButton
+        </AuthButton>
+        <AuthButton
           type="button"
           disabled={isLoading}
           onClick={onClose}
           secondary
         >
           Cancel
-        </CustomButton>
+        </AuthButton>
       </div>
     </AlertDialog>
   );
