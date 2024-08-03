@@ -43,7 +43,7 @@ const AlertDialog = ({ isOpen, onClose, children }: AlertDialogProps) => {
               leaveTo="opacity-0 translate-y-4 scale-95"
             >
               <DialogPanel className="relative w-full max-w-md sm:max-w-lg transform overflow-hidden rounded-xl bg-white p-4 sm:p-6 text-left align-middle shadow-xl transition-all">
-                <div className="absolute top-0 right-0 pt-4 pr-4 hidden sm:block z-10">
+                <div className="absolute top-0 right-0 pt-4 pr-4 block z-10">
                   <button
                     type="button"
                     onClick={onClose}

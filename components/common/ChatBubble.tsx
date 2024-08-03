@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import UserAvatar from "./UserAvatar";
 import { format } from "date-fns";
 import { User } from "@prisma/client";
+import ImageAlertDialog from "../layout/ImageAlertDialog";
 
 interface ChatBubbleProps {
   data: PopulatedMessageType;
@@ -25,6 +26,7 @@ const ChatBubble = ({
   const senderEmail = data.sender.email;
   const isOwnMessage = currentUser.email === senderEmail;
   const [showTime, setShowTime] = useState(false);
+  const [imageModelOpen, setImageModelOpen] = useState(false);
   const seenList = (data.seen || [])
     .filter((user) => user.email !== senderEmail)
     .map((user) => user.name);
@@ -65,14 +67,22 @@ const ChatBubble = ({
           )}
         >
           {data.image ? (
-            <Image
-              src={data.image}
-              alt="Image"
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="h-auto max-h-[280px] w-auto max-w-[280px] cursor-pointer hover:scale-105 transition-transform"
-            />
+            <>
+              <ImageAlertDialog
+                src={data.image}
+                isOpen={imageModelOpen}
+                onClose={() => setImageModelOpen(false)}
+              />
+              <Image
+                src={data.image}
+                onClick={() => setImageModelOpen(true)}
+                alt="Image"
+                width="0"
+                height="0"
+                sizes="100vw"
+                className="h-auto max-h-[280px] w-auto max-w-[280px] cursor-pointer hover:scale-105 transition-transform"
+              />
+            </>
           ) : (
             <div>{data.body}</div>
           )}
