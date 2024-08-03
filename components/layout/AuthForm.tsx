@@ -97,7 +97,7 @@ const AuthForm = () => {
           }
 
           if (callback?.ok && !callback?.error) {
-            router.push("/users");
+            router.push("/conversations");
           }
         })
         .finally(() => setIsLoading(false));

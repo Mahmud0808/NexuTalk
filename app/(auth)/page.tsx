@@ -16,7 +16,7 @@ export default function page() {
 
     if (session?.status === "authenticated") {
       timer = setTimeout(() => {
-        router.push("/users");
+        router.push("/conversations");
       }, 1200);
     } else if (session?.status === "unauthenticated") {
       timer = setTimeout(() => {
