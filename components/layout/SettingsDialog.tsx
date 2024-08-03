@@ -88,17 +88,17 @@ const SettingsDialog = ({
                   Photo
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
-                  <Image
-                    width={86}
-                    height={86}
-                    className="rounded-full"
-                    src={
-                      form.watch("image") ||
-                      currentUser?.image ||
-                      "/images/placeholder_profile_picture.png"
-                    }
-                    alt="Avatar"
-                  />
+                  <div className="relative inline-block h-24 w-24 overflow-hidden rounded-full bg-red-400">
+                    <Image
+                      fill
+                      src={
+                        form.watch("image") ||
+                        currentUser?.image ||
+                        "/images/placeholder_profile_picture.png"
+                      }
+                      alt="Avatar"
+                    />
+                  </div>
                   <CldUploadButton
                     options={{ maxFiles: 1 }}
                     onSuccess={handleUpload}
