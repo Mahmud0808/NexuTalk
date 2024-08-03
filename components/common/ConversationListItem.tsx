@@ -1,13 +1,12 @@
 import { PopulatedConversationType } from "@/lib/types";
-import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { useCallback, useMemo } from "react";
 import useOtherUsers from "@/lib/hooks/useOtherUsers.hooks";
-import { useSession } from "next-auth/react";
 import clsx from "clsx";
 import UserAvatar from "./UserAvatar";
 import { User } from "@prisma/client";
 import GroupAvatar from "./GroupAvatar";
+import { useRouter } from "next/navigation";
 
 interface ConversationListItemProps {
   conversation: PopulatedConversationType;
@@ -65,7 +64,7 @@ const ConversationListItem = ({
     <div
       onClick={handleClick}
       className={clsx(
-        "w-full relative flex items-center space-x-3 p-2 hover:bg-neutral-100 rounded-lg transition cursor-pointer",
+        "w-full relative flex flex-1 items-center space-x-3 p-2 hover:bg-neutral-100 rounded-lg transition cursor-pointer",
         selected ? "bg-neutral-100" : "bg-white"
       )}
     >

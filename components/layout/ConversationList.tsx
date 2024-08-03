@@ -52,14 +52,21 @@ const ConversationList = ({
               <MdOutlineGroupAdd size={20} />
             </div>
           </div>
-          {items.map((item) => (
-            <ConversationListItem
-              key={item.id}
-              conversation={item}
-              currentUser={currentUser}
-              selected={conversationId?.id === item.id}
-            />
-          ))}
+          <div className="flex flex-col space-y-1">
+            {items.map((item) => (
+              <ConversationListItem
+                key={item.id}
+                conversation={item}
+                currentUser={currentUser}
+                selected={conversationId?.id === item.id}
+              />
+            ))}
+            {items.length === 0 && (
+              <div className="w-full h-full">
+                <p className="text-center mt-6">No conversations</p>
+              </div>
+            )}
+          </div>
         </div>
       </aside>
     </>
