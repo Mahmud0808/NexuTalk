@@ -5,7 +5,7 @@ export type AuthVariant = "LOGIN" | "REGISTER";
 export const AuthFormSchema = (type: AuthVariant) =>
   z.object({
     // sign-up
-    userName:
+    username:
       type === "LOGIN"
         ? z.string().optional()
         : z

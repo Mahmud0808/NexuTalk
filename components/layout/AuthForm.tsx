@@ -37,7 +37,7 @@ const AuthForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      userName: "",
+      username: "",
       email: "",
       password: "",
     },
@@ -47,7 +47,7 @@ const AuthForm = () => {
     setIsLoading(true);
 
     const userData = {
-      name: values.userName!,
+      name: values.username!,
       email: values.email,
       password: values.password,
     };
@@ -150,7 +150,7 @@ const AuthForm = () => {
               {variant === "REGISTER" && (
                 <CustomInput
                   control={form.control}
-                  name="userName"
+                  name="username"
                   type="text"
                   label="Full Name"
                   placeholder="John Doe"
