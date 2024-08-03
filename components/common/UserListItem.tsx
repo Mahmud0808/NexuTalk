@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import UserAvatar from "./UserAvatar";
+import LoadingDialog from "./LoadingDialog";
 
 interface UserListItemProps {
   data: User;
@@ -24,17 +25,20 @@ const UserListItem = ({ data }: UserListItemProps) => {
   }, [data, router]);
 
   return (
-    <div
-      onClick={handleClick}
-      className="relative flex items-center space-x-3 rounded-lg p-2 cursor-pointer hover:bg-neutral-100"
-    >
-      <UserAvatar user={data} />
-      <div className="min-w-0 flex-1">
-        <div className="truncate text-base font-semibold text-gray-900 mb-1">
-          {data.name}
+    <>
+      {isLoading && <LoadingDialog />}
+      <div
+        onClick={handleClick}
+        className="relative flex items-center space-x-3 rounded-lg p-2 cursor-pointer hover:bg-neutral-100"
+      >
+        <UserAvatar user={data} />
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-base font-semibold text-gray-900 mb-1">
+            {data.name}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
