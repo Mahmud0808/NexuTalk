@@ -6,6 +6,7 @@ import useConversation from "@/lib/hooks/useConversation.hooks";
 import { Conversation, User } from "@prisma/client";
 import { useMemo } from "react";
 import { format } from "date-fns/format";
+import GroupAvatar from "../common/GroupAvatar";
 
 interface ChatDrawerBodyProps {
   otherUsers: User[];
@@ -65,7 +66,11 @@ const ChatDrawerBody = ({
       <div className="relative mt-6 flex-1 px-4 sm:px-6">
         <div className="flex flex-col items-center">
           <div className="mb-2">
-            <UserAvatar user={otherUsers[0]} size="lg" />
+            {conversation.isGroup ? (
+              <GroupAvatar users={conversation.users} size="lg" />
+            ) : (
+              <UserAvatar user={otherUsers[0]} size="lg" />
+            )}
           </div>
           <div className="font-semibold">{title}</div>
           <div className="text-sm text-gray-500">{statusText}</div>
@@ -84,6 +89,33 @@ const ChatDrawerBody = ({
           </div>
           <div className="w-full py-5 sm:px-0">
             <dl className="px-4 sm:px-6 space-y-8 sm:space-y-6">
+              {/* Group Chat */}
+              {conversation.isGroup && (
+                <div>
+                  <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                    Created At
+                  </dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                    {format(new Date(conversation.createdAt), "PP")}
+                  </dd>
+                </div>
+              )}
+              {conversation.isGroup && (
+                <div>
+                  <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                    Members
+                  </dt>
+                  <dd className="mt-2 text-sm text-gray-900 sm:col-span-2">
+                    {conversation.users.map((user) => {
+                      return <div key={user.id} className="flex gap-2 items-center">
+                        <UserAvatar user={user} size="group_sm" />
+                        <span className="text-sm mb-1">{user.name}</span>
+                      </div>;
+                    })}
+                  </dd>
+                </div>
+              )}
+              {/* Normal Chat */}
               {!conversation.isGroup && (
                 <div>
                   <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">

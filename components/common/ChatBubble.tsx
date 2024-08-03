@@ -24,11 +24,10 @@ const ChatBubble = ({
 }: ChatBubbleProps) => {
   const senderEmail = data.sender.email;
   const isOwnMessage = currentUser.email === senderEmail;
+  const [showTime, setShowTime] = useState(false);
   const seenList = (data.seen || [])
     .filter((user) => user.email !== senderEmail)
-    .map((user) => user.name)
-    .join(", ");
-  const [showTime, setShowTime] = useState(false);
+    .map((user) => user.name);
 
   return (
     <div
@@ -60,7 +59,9 @@ const ChatBubble = ({
           className={clsx(
             "text-sm w-fit max-w-lg overflow-hidden cursor-pointer",
             isOwnMessage ? "bg-sky-500 text-white" : "bg-gray-100",
-            data.image ? "p-0 rounded-md border border-slate-200" : "px-4 py-2 rounded-2xl"
+            data.image
+              ? "p-0 rounded-md border border-slate-200"
+              : "px-4 py-2 rounded-2xl"
           )}
         >
           {data.image ? (
@@ -86,7 +87,15 @@ const ChatBubble = ({
             isLast &&
             isOwnMessage &&
             seenList.length > 0 &&
-            (isGroup ? `Seen by ${seenList} ∙ ` : `Seen ∙ `)}
+            (isGroup
+              ? `Seen by ${
+                  seenList.length > 2
+                    ? `${seenList.slice(0, 2).join(", ")} and ${
+                        seenList.length - 2
+                      } other${seenList.length - 2 > 1 ? "s" : ""}`
+                    : seenList.join(" and ")
+                } ∙ `
+              : `Seen ∙ `)}
           {showTime && format(new Date(data.createdAt), "p")}
         </div>
       </div>

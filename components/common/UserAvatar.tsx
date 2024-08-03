@@ -4,7 +4,7 @@ import Image from "next/image";
 
 interface UserAvatarProps {
   user?: User;
-  size?: "default" | "sm" | "lg";
+  size?: "default" | "sm" | "lg" | "group_sm" | "group_lg";
 }
 
 const UserAvatar = ({ user, size = "default" }: UserAvatarProps) => {
@@ -15,7 +15,9 @@ const UserAvatar = ({ user, size = "default" }: UserAvatarProps) => {
           "relative inline-block overflow-hidden rounded-full",
           size === "default" && " h-9 w-9 md:h-11 md:w-11",
           size === "sm" && "h-7 w-7 md:h-9 md:w-9",
-          size === "lg" && "h-16 w-16 md:h-20 md:w-20"
+          size === "lg" && "h-16 w-16 md:h-20 md:w-20",
+          size === "group_sm" && "h-5 w-5 md:h-6 md:w-6",
+          size === "group_lg" && "h-8 w-8 md:h-10 md:w-10"
         )}
       >
         <Image
@@ -30,7 +32,8 @@ const UserAvatar = ({ user, size = "default" }: UserAvatarProps) => {
           size === "default" && "h-2 w-2 md:h-[9px] md:w-[9px] top-0 right-0",
           size === "sm" && "h-1 w-1 md:h-[6px] md:w-[6px] top-0 right-0",
           size === "lg" &&
-            "h-2 w-2 md:h-[10px] md:w-[10px] top-[6px] right-[6px]"
+            "h-2 w-2 md:h-[10px] md:w-[10px] top-[6px] right-[6px]",
+          (size === "group_sm" || size === "group_lg") && "hidden"
         )}
       />
     </div>

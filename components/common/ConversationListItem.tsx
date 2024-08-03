@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import clsx from "clsx";
 import UserAvatar from "./UserAvatar";
 import { User } from "@prisma/client";
+import GroupAvatar from "./GroupAvatar";
 
 interface ConversationListItemProps {
   conversation: PopulatedConversationType;
@@ -68,7 +69,11 @@ const ConversationListItem = ({
         selected ? "bg-neutral-100" : "bg-white"
       )}
     >
-      <UserAvatar user={otherUsers[0]} />
+      {conversation.isGroup ? (
+        <GroupAvatar users={conversation.users} />
+      ) : (
+        <UserAvatar user={otherUsers[0]} />
+      )}
       <div className="min-w-0 flex-1 mb-1">
         <div className="flex justify-between items-center">
           <div className="truncate text-base font-semibold text-gray-900 flex-1">

@@ -14,7 +14,13 @@ export async function POST(req: Request) {
     }
 
     if (isGroup && (!members || members.length < 2 || !name)) {
-      return new NextResponse("Invalid Data", { status: 400 });
+      if (!members || members.length < 2) {
+        return new NextResponse("Select at least 2 members.", { status: 400 });
+      } else if (!name) {
+        return new NextResponse("Name is required.", { status: 400 });
+      } else {
+        return new NextResponse("Invalid Data.", { status: 400 });
+      }
     }
 
     if (isGroup) {

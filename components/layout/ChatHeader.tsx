@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
 import UserAvatar from "../common/UserAvatar";
 import ChatDrawer from "./ChatDrawer";
+import GroupAvatar from "../common/GroupAvatar";
 
 interface ChatHeaderProps {
   conversation: Conversation & {
@@ -46,7 +47,11 @@ const ChatHeader = ({ conversation, currentUser }: ChatHeaderProps) => {
           >
             <HiChevronLeft size={32} />
           </Link>
-          <UserAvatar user={otherUsers[0]} />
+          {conversation.isGroup ? (
+            <GroupAvatar users={conversation.users} />
+          ) : (
+            <UserAvatar user={otherUsers[0]} />
+          )}
           <div className="flex flex-col mb-1">
             <div className="text-base font-semibold">
               {conversation?.name || otherUsers[0]?.name}
