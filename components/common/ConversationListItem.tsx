@@ -55,8 +55,7 @@ const ConversationListItem = ({
     const seenArray = lastMessage.seen || [];
 
     return (
-      seenArray.filter((user) => user.email === currentUser.email).length !==
-        0 || lastMessage.sender.email === currentUser.email
+      seenArray.filter((user) => user.email === currentUser.email).length !== 0
     );
   }, [currentUser.email, lastMessage]);
 
@@ -90,6 +89,11 @@ const ConversationListItem = ({
             hasSeen || selected ? "text-gray-500" : "text-black font-semibold"
           )}
         >
+          {conversation.isGroup &&
+            `${
+              conversation.messages[conversation.messages.length - 1].sender
+                .name
+            }: `}
           {lastMessageText}
         </div>
       </div>
