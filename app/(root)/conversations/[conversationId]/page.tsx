@@ -26,7 +26,7 @@ const page = async ({ params }: { params: ParamProps }) => {
   }
 
   return (
-    <div className="lg:pl-80 h-full">
+    <div className="lg:pl-60 xl:pr-96 h-full">
       <div className="h-full flex flex-col">
         <ChatHeader conversation={conversation} currentUser={currentUser!} />
         <MessagesBody
