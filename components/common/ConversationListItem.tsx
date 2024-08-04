@@ -77,11 +77,9 @@ const ConversationListItem = ({
           <div className="truncate text-base font-semibold text-gray-900 flex-1">
             {conversation.name || otherUsers[0].name}
           </div>
-          {lastMessage?.createdAt && (
-            <div className="text-xs text-gray-400 font-light">
-              {format(new Date(lastMessage.createdAt), "p")}
-            </div>
-          )}
+          <div className="text-xs text-gray-400 font-light">
+            {format(new Date(conversation.lastMessageAt), "p")}
+          </div>
         </div>
         <div
           className={clsx(
