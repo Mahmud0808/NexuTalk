@@ -44,7 +44,7 @@ const MessagesBody = ({
         }
 
         // add the new message to the list
-        return [...current, message];
+        return [message, ...current];
       });
 
       bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -73,7 +73,11 @@ const MessagesBody = ({
   }, [conversationId]);
 
   return (
-    <div className="flex flex-col flex-1 overflow-y-auto p-4 gap-1 lg:gap-2">
+    <div
+      id="target"
+      className="flex flex-col-reverse flex-1 overflow-y-auto p-4 gap-1 lg:gap-2 scrollbar"
+    >
+      <div ref={bottomRef} className="pt-24" />
       {messages.map((message, index) => (
         <ChatBubble
           key={message.id}
@@ -83,7 +87,6 @@ const MessagesBody = ({
           isLast={index === messages.length - 1}
         />
       ))}
-      <div ref={bottomRef} className="pt-24" />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import EmptyState from "@/components/common/EmptyState";
 import ChatHeader from "@/components/layout/ChatHeader";
 import ChatInputBox from "@/components/layout/ChatInputBox";
 import DeletedConversation from "@/components/layout/DeletedConversation";

@@ -4,8 +4,7 @@
 
 html,
 body {
-  height: 100%;
-  min-height: 100% !important;
+  @apply h-full !min-h-full;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -17,4 +16,20 @@ body {
 * {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar {
+  overflow-y: auto; /* Allows vertical scroll */
+}
+
+/* Show scrollbar in chat container for Webkit browsers */
+.scrollbar::-webkit-scrollbar {
+  display: block;
+}
+
+/* Show scrollbar in chat container for IE, Edge, and Firefox */
+.scrollbar {
+  -ms-overflow-style: auto; /* IE and Edge */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #c1c1c1 #f1f5f9;
 }
