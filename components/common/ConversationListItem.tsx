@@ -7,6 +7,7 @@ import UserAvatar from "./UserAvatar";
 import { User } from "@prisma/client";
 import GroupAvatar from "./GroupAvatar";
 import { useRouter } from "next/navigation";
+import { getTimeAgo } from "@/lib/utility/methods";
 
 interface ConversationListItemProps {
   conversation: PopulatedConversationType;
@@ -78,7 +79,12 @@ const ConversationListItem = ({
             {conversation.name || otherUsers[0].name}
           </div>
           <div className="text-xs text-gray-400 font-light">
-            {format(new Date(conversation.lastMessageAt), "p")}
+            {getTimeAgo(
+              conversation.messages.length > 0
+                ? conversation.messages[conversation.messages.length - 1]
+                    ?.createdAt
+                : conversation.createdAt
+            )}
           </div>
         </div>
         <div
