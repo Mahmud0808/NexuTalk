@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import SplashScreen from "@/components/layout/SplashScreen";
 
-export default function page() {
+export default function Page() {
   const session = useSession();
   const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
@@ -25,7 +25,7 @@ export default function page() {
     }
 
     return () => clearTimeout(timer);
-  }, [session?.status]);
+  }, [session?.status, router]);
 
   if (showSplash) {
     return <SplashScreen />;

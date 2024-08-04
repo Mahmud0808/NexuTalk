@@ -12,7 +12,7 @@ interface ParamProps {
   conversationId: string;
 }
 
-const page = async ({ params }: { params: ParamProps }) => {
+const Page = async ({ params }: { params: ParamProps }) => {
   const currentUser = await getCurrentUser();
   const conversation = await getConversationById(params.conversationId);
   const messages = await getMessages(params.conversationId);
@@ -36,4 +36,4 @@ const page = async ({ params }: { params: ParamProps }) => {
   );
 };
 
-export default page;
+export default Page;

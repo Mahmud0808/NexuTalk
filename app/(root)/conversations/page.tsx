@@ -5,7 +5,7 @@ import useConversation from "@/lib/hooks/useConversation.hooks";
 import clsx from "clsx";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   const { isOpen } = useConversation();
 
   return (
@@ -17,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
