@@ -90,7 +90,7 @@ const ConversationList = ({
       />
       <aside
         className={clsx(
-          "fixed w-full inset-y-0 pb-20 lg:pb-0 left-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200 bg-white",
+          "fixed w-full inset-y-0 pb-20 lg:pb-0 left-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200 bg-white scrollbar",
           isOpen ? "hidden" : "block"
         )}
       >
