@@ -44,7 +44,7 @@ const ChatBubble = ({
           (isOwnMessage || !isGroup) && "hidden"
         )}
       >
-        <UserAvatar user={data.sender} size="sm" showActiveStatus={false} />
+        <UserAvatar user={data.sender} size="sm" showActiveStatus={isGroup} />
       </div>
       <div
         className={clsx(

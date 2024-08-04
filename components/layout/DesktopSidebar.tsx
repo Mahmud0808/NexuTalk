@@ -42,7 +42,7 @@ const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
             onClick={() => setOIspen(true)}
             className="cursor-pointer hover:opacity-75 transition"
           >
-            <UserAvatar user={currentUser} />
+            <UserAvatar user={currentUser} showActiveStatus={false} />
           </div>
         </nav>
       </div>
