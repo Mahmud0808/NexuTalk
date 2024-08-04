@@ -98,7 +98,7 @@ const AuthForm = () => {
         }
 
         if (callback?.ok && !callback?.error) {
-          router.push("/conversations");
+          window.location.href = "/conversations";
         }
       });
     }
