@@ -30,7 +30,7 @@ const GroupAvatar = ({ users = [], size = "default" }: GroupAvatarProps) => {
   return (
     <div
       className={clsx(
-        "relative overflow-hidden rounded-full bg-slate-200",
+        "relative overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700",
         size === "default" && "h-9 w-9 md:h-11 md:w-11",
         size === "lg" && "h-16 w-16 md:h-20 md:w-20"
       )}
