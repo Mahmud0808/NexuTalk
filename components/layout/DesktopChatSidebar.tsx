@@ -25,11 +25,13 @@ const DesktopChatSidebar = ({
 
   return (
     <>
-      <ConfirmDialog
-        isOpen={isModalOpen}
-        onClose={() => setModalIsOpen(false)}
-        conversationId={conversation.id}
-      />
+      {conversation && (
+        <ConfirmDialog
+          isOpen={isModalOpen}
+          onClose={() => setModalIsOpen(false)}
+          conversationId={conversation.id}
+        />
+      )}
       <div className="hidden xl:fixed xl:inset-y-0 xl:right-0 xl:z-40 xl:w-96 xl:overflow-y-auto xl:bg-white xl:border-l-[1px] xl:flex xl:flex-col">
         <ChatDrawerBody
           data={conversation}

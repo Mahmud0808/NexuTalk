@@ -30,11 +30,13 @@ const ChatDrawer = ({
 
   return (
     <>
-      <ConfirmDialog
-        isOpen={isModalOpen}
-        onClose={() => setModalIsOpen(false)}
-        conversationId={conversation.id}
-      />
+      {conversation && (
+        <ConfirmDialog
+          isOpen={isModalOpen}
+          onClose={() => setModalIsOpen(false)}
+          conversationId={conversation.id}
+        />
+      )}
       <Transition show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={onClose}>
           <TransitionChild

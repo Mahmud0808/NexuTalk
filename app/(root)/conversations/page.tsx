@@ -10,7 +10,7 @@ const page = () => {
 
   return (
     <div
-      className={clsx("h-full lg:pl-80 lg:block", isOpen ? "block" : "hidden")}
+      className={clsx("h-full w-full lg:pl-80 lg:block", isOpen ? "block" : "hidden")}
     >
       <EmptyState />
     </div>

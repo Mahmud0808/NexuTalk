@@ -2,7 +2,6 @@
 
 import { IoClose, IoTrash } from "react-icons/io5";
 import UserAvatar from "../common/UserAvatar";
-import useConversation from "@/lib/hooks/useConversation.hooks";
 import { Conversation, User } from "@prisma/client";
 import { useMemo } from "react";
 import { format } from "date-fns/format";
@@ -101,19 +100,27 @@ const ChatDrawerBody = ({
                 </div>
               )}
               {conversation.isGroup && (
-                <div>
-                  <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
-                    Members
-                  </dt>
-                  <dd className="mt-2 text-sm text-gray-900 sm:col-span-2">
-                    {conversation.users.map((user) => {
-                      return <div key={user.id} className="flex gap-2 items-center">
-                        <UserAvatar user={user} size="group_sm" />
-                        <span className="text-sm mb-1">{user.name}</span>
-                      </div>;
-                    })}
-                  </dd>
-                </div>
+                <>
+                  <hr />
+                  <div>
+                    <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                      Members
+                    </dt>
+                    <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 flex flex-col gap-1">
+                      {conversation.users.map((user) => {
+                        return (
+                          <div
+                            key={user.id}
+                            className="flex gap-2 items-center"
+                          >
+                            <UserAvatar user={user} size="group_sm" />
+                            <span className="text-sm mb-1">{user.name}</span>
+                          </div>
+                        );
+                      })}
+                    </dd>
+                  </div>
+                </>
               )}
               {/* Normal Chat */}
               {!conversation.isGroup && (

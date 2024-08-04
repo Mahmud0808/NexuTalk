@@ -90,9 +90,10 @@ const ConversationListItem = ({
           )}
         >
           {conversation.isGroup &&
+            conversation.messages.length > 0 &&
             `${
-              conversation.messages[conversation.messages.length - 1].sender
-                .name
+              conversation.messages[conversation.messages.length - 1]?.sender
+                ?.name
             }: `}
           {lastMessageText}
         </div>

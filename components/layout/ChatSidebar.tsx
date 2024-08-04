@@ -18,10 +18,12 @@ export default async function ChatSidebar({
   return (
     <div className="h-full">
       <DesktopSidebar currentUser={currentUser!} />
-      <DesktopChatSidebar
-        currentUser={currentUser!}
-        conversation={conversation}
-      />
+      {conversation?.id && (
+        <DesktopChatSidebar
+          currentUser={currentUser!}
+          conversation={conversation}
+        />
+      )}
       <MobileNavbar />
       <main className="lg:pl-20 h-full">{children}</main>
     </div>

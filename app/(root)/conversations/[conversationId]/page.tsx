@@ -22,7 +22,7 @@ const page = async ({ params }: { params: ParamProps }) => {
   }
 
   return (
-    <div className={clsx("lg:pl-80 h-full", conversation?.id && "xl:pr-96")}>
+    <div className={clsx("lg:pl-60 h-full", conversation?.id && "xl:pr-96")}>
       <div className="h-full flex flex-col">
         <ChatHeader conversation={conversation} currentUser={currentUser!} />
         <MessagesBody
