@@ -90,7 +90,7 @@ const ConversationListItem = ({
           )}
         >
           {conversation.isGroup &&
-            conversation.messages.length > 0 &&
+            conversation.messages?.length > 0 &&
             `${
               conversation.messages[conversation.messages.length - 1]?.sender
                 ?.name
