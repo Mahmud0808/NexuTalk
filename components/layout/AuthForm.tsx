@@ -86,21 +86,21 @@ const AuthForm = () => {
       signIn("credentials", {
         ...userData,
         redirect: false,
-      })
-        .then((callback) => {
-          if (callback?.error) {
-            toast({
-              title: "Uh Oh! Something went wrong.",
-              description: callback.error,
-              variant: "destructive",
-            });
-          }
+      }).then((callback) => {
+        if (callback?.error) {
+          setIsLoading(false);
 
-          if (callback?.ok && !callback?.error) {
-            router.push("/conversations");
-          }
-        })
-        .finally(() => setIsLoading(false));
+          toast({
+            title: "Uh Oh! Something went wrong.",
+            description: callback.error,
+            variant: "destructive",
+          });
+        }
+
+        if (callback?.ok && !callback?.error) {
+          router.push("/conversations");
+        }
+      });
     }
   };
 
