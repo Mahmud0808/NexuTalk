@@ -9,6 +9,7 @@ import { User } from "@prisma/client";
 import axios from "axios";
 import { pusherClient } from "@/lib/utility/pusher";
 import { find } from "lodash";
+import { HiHandRaised } from "react-icons/hi2";
 
 interface MessagesBodyProps {
   initialMessages: PopulatedMessageType[];
@@ -78,6 +79,15 @@ const MessagesBody = ({
       className="flex flex-col-reverse flex-1 overflow-y-auto p-4 gap-1 lg:gap-2 scrollbar"
     >
       <div ref={bottomRef} className="pt-24" />
+      {messages.length === 0 && (
+        <div className="flex flex-col flex-1 pt-12 gap-1 items-center text-text-secondary-dark opacity-70">
+          <HiHandRaised className="size-12 md:size-16" />
+          <div className="text-center">
+            <p className="text-base">Hi there!</p>
+            <p className="text-sm">Start a new conversation by typing below.</p>
+          </div>
+        </div>
+      )}
       {messages.map((message, index) => (
         <ChatBubble
           key={message.id}
