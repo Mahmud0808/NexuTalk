@@ -90,18 +90,18 @@ const ConversationList = ({
       />
       <aside
         className={clsx(
-          "fixed w-full inset-y-0 pb-20 lg:pb-0 left-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200 bg-white scrollbar",
+          "fixed w-full inset-y-0 pb-20 lg:pb-0 left-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-border bg-bg scrollbar",
           isOpen ? "hidden" : "block"
         )}
       >
         <div className="px-5">
           <div className="flex items-center justify-between">
-            <div className="py-4 text-2xl font-bold text-neutral-800">
+            <div className="py-4 text-2xl font-bold text-text-large">
               Messages
             </div>
             <div
               onClick={() => setIsModelOpen(true)}
-              className="rounded-full p-2 bg-gray-100 text-gray-600 cursor-pointer hover:opacity-75 transition"
+              className="rounded-full p-2 bg-bg-icon-button text-text-icon-button-dim cursor-pointer hover:opacity-75 transition"
             >
               <MdOutlineGroupAdd size={20} />
             </div>
@@ -116,12 +116,6 @@ const ConversationList = ({
                   selected={conversationId?.id === item.id}
                 />
               )
-            )}
-            {(conversations.length === 0 ? initialItems : conversations)
-              .length === 0 && (
-              <div className="w-full h-full">
-                <p className="text-center mt-6">No conversations</p>
-              </div>
             )}
           </div>
         </div>

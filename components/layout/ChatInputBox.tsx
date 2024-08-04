@@ -12,7 +12,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { CldUploadButton } from "next-cloudinary";
@@ -50,7 +49,7 @@ const ChatInputBox = () => {
   };
 
   return (
-    <div className="bg-white w-full p-4 border-t flex items-center gap-2 lg:gap-4">
+    <div className="bg-bg w-full p-4 border-t-[1px] border-border flex items-center gap-2 lg:gap-4">
       <CldUploadButton
         options={{ maxFiles: 1 }}
         onSuccess={handleUpload}
@@ -59,7 +58,7 @@ const ChatInputBox = () => {
       >
         <HiPhoto
           size={30}
-          className="text-primary hover:text-primary-dark transition cursor-pointer"
+          className="text-accent hover:text-accent-dark transition cursor-pointer"
         />
       </CldUploadButton>
       <Form {...form}>
@@ -79,7 +78,7 @@ const ChatInputBox = () => {
                       placeholder="Aa"
                       autoComplete="off"
                       {...field}
-                      className="text-black font-light p2 h-auto bg-neutral-100 w-full rounded-full focus-visible:ring-white"
+                      className="text-text font-light dark:font-normal caret-accent p2 h-auto !bg-bg-input w-full rounded-full focus-visible:ring-bg dark:focus-visible:ring-bg outline-none shadow-none"
                     />
                   </FormControl>
                 </FormItem>
@@ -88,7 +87,7 @@ const ChatInputBox = () => {
           />
           <button
             type="submit"
-            className="bg-primary hover:bg-primary-dark px-4 py-2 h-auto rounded-full transition"
+            className="bg-accent hover:bg-accent-dark px-4 py-2 h-auto rounded-full transition"
           >
             <HiPaperAirplane size={18} className="text-white" />
           </button>

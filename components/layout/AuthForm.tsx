@@ -227,7 +227,7 @@ const AuthForm = () => {
             &nbsp;
             <div
               onClick={toggleVariant}
-              className="underline cursor-pointer text-primary"
+              className="underline cursor-pointer text-accent"
             >
               {variant === "LOGIN" ? "Register" : "Login"}
             </div>

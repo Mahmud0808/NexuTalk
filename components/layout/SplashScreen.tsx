@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const SplashScreen = () => {
   return (
-    <div className="w-full h-full flex gap-3 justify-center items-center text-primary">
+    <div className="w-full h-full flex gap-3 justify-center items-center text-accent">
       <Image
         id="loader"
         src="/images/preloader.gif"

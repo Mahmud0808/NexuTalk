@@ -44,7 +44,7 @@ const ChatHeader = ({ conversation, currentUser }: ChatHeaderProps) => {
         otherUsers={otherUsers}
         onClose={() => setDrawerOpen(false)}
       />
-      <div className="bg-white w-full flex border-b-[1px] px-4 py-3 lg:px-6 justify-between items-center shadow-sm">
+      <div className="bg-bg w-full flex border-b-[1px] border-border px-4 py-3 lg:px-6 justify-between items-center shadow-sm">
         <div className="flex gap-3 items-center">
           <Link
             href="/conversations"
@@ -58,10 +58,10 @@ const ChatHeader = ({ conversation, currentUser }: ChatHeaderProps) => {
             <UserAvatar user={otherUsers[0]} />
           )}
           <div className="flex flex-col mb-1">
-            <div className="text-base font-semibold">
+            <div className="text-base font-semibold dark:font-medium text-text">
               {conversation?.name || otherUsers[0]?.name}
             </div>
-            <div className="text-sm font-light text-gray-500">{statusText}</div>
+            <div className="text-sm font-light dark:font-normal text-text-secondary">{statusText}</div>
           </div>
         </div>
         <HiEllipsisHorizontal

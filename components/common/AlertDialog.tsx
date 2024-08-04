@@ -42,12 +42,12 @@ const AlertDialog = ({ isOpen, onClose, children }: AlertDialogProps) => {
               leaveFrom="opacity-100 translate-y-0 scale-100"
               leaveTo="opacity-0 translate-y-4 scale-95"
             >
-              <DialogPanel className="relative w-full max-w-md sm:max-w-lg transform overflow-hidden rounded-xl bg-white p-4 sm:p-6 text-left align-middle shadow-xl transition-all">
+              <DialogPanel className="relative w-full max-w-md sm:max-w-lg transform overflow-hidden rounded-xl bg-bg p-4 sm:p-6 text-left align-middle shadow-xl transition-all">
                 <div className="absolute top-0 right-0 pt-4 pr-4 block z-10">
                   <button
                     type="button"
                     onClick={onClose}
-                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    className="rounded-md bg-bg text-text-secondary hover:text-text-secondary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent dark:focus:ring-0"
                   >
                     <IoClose className="w-6 h-6" />
                   </button>

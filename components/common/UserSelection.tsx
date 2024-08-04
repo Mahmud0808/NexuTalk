@@ -19,7 +19,7 @@ const UserSelection = ({
 }: UserSelectionProps) => {
   return (
     <div className="z-[100]">
-      <label className="block text-sm font-medium leading-6 text-gray-900">
+      <label className="block text-sm font-medium leading-6 text-text">
         {label}
       </label>
       <div className="mt-2">
@@ -32,10 +32,26 @@ const UserSelection = ({
           menuPortalTarget={document.body}
           styles={{
             menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+            option: (provided, state) => ({
+              ...provided,
+              padding: 8,
+              fontSize: 14,
+            }),
           }}
           classNames={{
-            control: () => "text-sm",
+            control: () => "text-sm font-medium leading-6 text-text",
           }}
+          className="react-select-container"
+          classNamePrefix="react-select"
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              text: "text-text text-sm",
+              primary25: "var(--color-accent)",
+              neutral0: "var(--color-bg-input)",
+            },
+          })}
         />
       </div>
     </div>

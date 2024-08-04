@@ -57,7 +57,7 @@ const ChatDrawerBody = ({
             {onClose && (
               <button
                 type="button"
-                className="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                className="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent"
                 onClick={handleClose}
               >
                 <span className="sr-only">Close panel</span>
@@ -76,17 +76,19 @@ const ChatDrawerBody = ({
               <UserAvatar user={otherUsers[0]} size="lg" />
             )}
           </div>
-          <div className="font-semibold">{title}</div>
-          <div className="text-sm text-gray-500">{statusText}</div>
+          <div className="font-semibold dark:font-medium text-text">
+            {title}
+          </div>
+          <div className="text-sm text-text-secondary">{statusText}</div>
           <div className="flex gap-10 my-8">
             <div
               onClick={onDelete}
               className="flex flex-col gap-2 items-center cursor-pointer group"
             >
-              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-100 group-hover:bg-neutral-200 transition">
+              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-bg-highlight group-hover:bg-neutral-200 dark:group-hover:bg-gray-600 transition">
                 <IoTrash size={20} />
               </div>
-              <div className="text-sm font-light text-neutral-600 group-hover:text-neutral-800 transition">
+              <div className="text-sm font-light dark:font-normal text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-800 dark:group-hover:text-gray-200 transition">
                 Delete
               </div>
             </div>
@@ -96,22 +98,22 @@ const ChatDrawerBody = ({
               {/* Group Chat */}
               {conversation.isGroup && (
                 <div>
-                  <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                  <dt className="text-sm font-medium text-text-info-title sm:w-40 sm:flex-shrink-0">
                     Created At
                   </dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                  <dd className="mt-1 text-sm text-text sm:col-span-2">
                     {format(new Date(conversation.createdAt), "PP")}
                   </dd>
                 </div>
               )}
               {conversation.isGroup && (
                 <>
-                  <hr />
+                  <hr className="border-border-secondary" />
                   <div>
-                    <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                    <dt className="text-sm font-medium text-text-info-title sm:w-40 sm:flex-shrink-0">
                       Members
                     </dt>
-                    <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 flex flex-col gap-1">
+                    <dd className="mt-2 text-sm text-text sm:col-span-2 flex flex-col gap-1">
                       {conversation.users.map((user) => {
                         return (
                           <div
@@ -130,24 +132,24 @@ const ChatDrawerBody = ({
               {/* Normal Chat */}
               {!conversation.isGroup && (
                 <div>
-                  <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                  <dt className="text-sm font-medium text-text-info-title sm:w-40 sm:flex-shrink-0">
                     Email
                   </dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                  <dd className="mt-1 text-sm text-text sm:col-span-2">
                     {otherUsers[0].email}
                   </dd>
                 </div>
               )}
               {!conversation.isGroup && (
                 <>
-                  <hr />
+                  <hr className="border-border-secondary" />
                   <div>
-                    <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                    <dt className="text-sm font-medium text-text-info-title sm:w-40 sm:flex-shrink-0">
                       Joined
                     </dt>
                     <time
                       dateTime={joinedDate}
-                      className="mt-1 text-sm text-gray-900 sm:col-span-2"
+                      className="mt-1 text-sm text-text sm:col-span-2"
                     >
                       {joinedDate}
                     </time>

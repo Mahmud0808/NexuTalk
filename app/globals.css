@@ -2,6 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Light Theme */
+  :root {
+    --color-transparent: rgba(0, 0, 0, 0);
+    --color-bg: theme(colors.white);
+    --color-bg-secondary: theme(colors.slate.100);
+    --color-border: theme(colors.gray.200);
+    --color-border-secondary: #ddd;
+    --color-accent: #188afd;
+    --color-accent-dark: #0070f3;
+    --color-text: theme(colors.slate.900);
+    --color-text-secondary: theme(colors.slate.400);
+    --color-text-secondary-dark: theme(colors.slate.600);
+    --color-text-secondary-hover: theme(colors.slate.500);
+    --color-text-large: theme(colors.gray.800);
+    --color-bg-icon-button: theme(colors.gray.100);
+    --color-text-icon-button: theme(colors.gray.600);
+    --color-text-icon-button-dim: theme(colors.gray.600);
+    --color-bg-highlight: theme(colors.slate.100);
+    --color-text-info-title: theme(colors.gray.500);
+    --color-bg-input: theme(colors.neutral.100);
+    --color-bg-chat-bubble: theme(colors.gray.100);
+    --color-scrollbar: #c1c1c1;
+    --color-bg-scrollbar: var(--color-bg);
+  }
+
+  /* Dark Theme */
+  .dark {
+    --color-bg: #1b252f;
+    --color-bg-secondary: #1b252f;
+    --color-border: #152029;
+    --color-border-secondary: theme(colors.gray.700);
+    --color-accent: #188afd;
+    --color-accent-dark: #0070f3;
+    --color-text: theme(colors.gray.50);
+    --color-text-secondary: theme(colors.gray.500);
+    --color-text-secondary-dark: theme(colors.slate.300);
+    --color-text-secondary-hover: theme(colors.slate.400);
+    --color-text-large: theme(colors.gray.100);
+    --color-bg-icon-button: #474e55;
+    --color-text-icon-button: theme(colors.white);
+    --color-text-icon-button-dim: theme(colors.gray.400);
+    --color-bg-highlight: #3e454d;
+    --color-text-info-title: theme(colors.gray.400);
+    --color-bg-input: #171e26;
+    --color-bg-chat-bubble: #2c3640;
+    --color-scrollbar: #474e55;
+  }
+}
+
 html,
 body {
   @apply h-full !min-h-full;
@@ -31,5 +81,41 @@ body {
 .scrollbar {
   -ms-overflow-style: auto; /* IE and Edge */
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #c1c1c1 #f1f5f9;
+  scrollbar-color: var(--color-scrollbar) var(--color-bg-scrollbar);
+}
+
+@layer components {
+  .react-select-container .react-select__control {
+    @apply text-sm font-medium leading-6 !bg-bg-input border-[1px] border-slate-200 hover:border-slate-200 dark:border-[#1E293B] dark:hover:border-[#1E293B] rounded-md hover:cursor-pointer;
+  }
+
+  .react-select-container .react-select__control--is-focused {
+    @apply text-sm font-medium leading-6 ring-2 ring-accent dark:ring-white ring-offset-bg dark:ring-offset-bg ring-offset-2 shadow-none rounded-md;
+  }
+
+  .react-select-container .react-select__menu {
+    @apply text-sm font-medium leading-6 bg-bg-input dark:bg-neutral-700 border-2 border-neutral-300 dark:border-neutral-600;
+  }
+
+  .react-select-container .react-select__option {
+    @apply text-sm font-medium leading-6 text-text dark:text-text bg-bg-input hover:bg-bg-input dark:bg-bg-input dark:hover:bg-bg-input;
+  }
+
+  .react-select-container .react-select__option--is-focused {
+    @apply text-sm font-medium leading-6 bg-accent text-text;
+  }
+
+  .react-select-container .react-select__indicators {
+    @apply text-text-secondary hover:text-text-secondary-dark;
+  }
+
+  .react-select-container .react-select__indicator-separator {
+    @apply text-sm font-medium leading-6 bg-text-secondary text-red-500;
+  }
+
+  .react-select-container .react-select__input-container,
+  .react-select-container .react-select__placeholder,
+  .react-select-container .react-select__single-value {
+    @apply text-sm font-medium leading-6 text-text-secondary dark:text-text-secondary;
+  }
 }

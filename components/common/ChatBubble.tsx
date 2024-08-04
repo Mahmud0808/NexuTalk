@@ -54,7 +54,7 @@ const ChatBubble = ({
       >
         <div
           className={clsx(
-            "text-sm text-gray-500",
+            "text-sm text-gray-500 dark:text-gray-400",
             !isOwnMessage && "pl-2",
             (isOwnMessage || !isGroup) && "hidden"
           )}
@@ -65,10 +65,10 @@ const ChatBubble = ({
           onClick={() => setShowTime(!showTime)}
           className={clsx(
             "text-sm w-fit max-w-lg overflow-hidden cursor-pointer",
-            isOwnMessage ? "bg-sky-500 text-white" : "bg-gray-100",
+            isOwnMessage ? "bg-accent text-white" : "bg-bg-chat-bubble text-text",
             data.image
-              ? "p-0 rounded-md border border-slate-200"
-              : "px-4 py-2 rounded-2xl"
+              ? "p-0 rounded-lg border-[1px] border-bg-chat-bubble"
+              : "px-4 py-2 rounded-3xl"
           )}
         >
           {data.image ? (
@@ -94,7 +94,7 @@ const ChatBubble = ({
         </div>
         <div
           className={clsx(
-            "flex text-xs text-gray-400",
+            "flex text-xs text-text-info-title",
             isOwnMessage ? "pr-2" : "pl-2"
           )}
         >

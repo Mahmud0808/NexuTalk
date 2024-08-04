@@ -76,19 +76,19 @@ const SettingsDialog = ({
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+            <h2 className="text-base font-semibold leading-7 text-text">
               Profile
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="mt-1 text-sm leading-6 text-text-secondary-dark">
               Edit your public information
             </p>
             <div className="mt-10 flex flex-col gap-y-8">
               <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
+                <label className="block text-sm font-medium leading-6 text-text">
                   Photo
                 </label>
                 <div className="mt-2 flex items-center gap-x-3">
-                  <div className="relative inline-block h-24 w-24 overflow-hidden rounded-full bg-red-400">
+                  <div className="relative inline-block h-24 w-24 overflow-hidden rounded-full">
                     <Image
                       fill
                       src={
@@ -115,7 +115,7 @@ const SettingsDialog = ({
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900">
+                    <FormLabel className="block text-sm font-medium leading-6 text-text">
                       Name
                     </FormLabel>
                     <FormControl>
@@ -125,6 +125,7 @@ const SettingsDialog = ({
                         placeholder={currentUser?.name || ""}
                         autoComplete="off"
                         disabled={isLoading}
+                        className="!bg-bg-input"
                         {...field}
                       />
                     </FormControl>

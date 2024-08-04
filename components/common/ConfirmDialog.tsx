@@ -53,17 +53,17 @@ const ConfirmDialog = ({
   return (
     <AlertDialog isOpen={isOpen} onClose={onClose}>
       <div className="flex items-start">
-        <div className="mx-auto flex h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 justify-center items-center rounded-full bg-red-100">
+        <div className="mx-auto flex h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0 justify-center items-center rounded-full bg-red-100 dark:bg-red-200">
           <FiAlertTriangle className="size-5 sm:size-6 text-red-500" />
         </div>
         <div className="ml-4 mt-2 sm:mt-3 text-left">
           <DialogTitle>
-            <h3 className="text-base font-semibold leading-6 text-gray-900">
+            <h3 className="text-base font-semibold leading-6 text-text">
               Delete Conversation
             </h3>
           </DialogTitle>
           <div className="mt-1 sm:mt-2">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Are you sure you want to delete this conversation? This action
               cannot be undone.
             </p>

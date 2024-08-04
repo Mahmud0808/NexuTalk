@@ -1,12 +1,12 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -33,12 +33,29 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       colors: {
-        primary: "#188AFD",
-        "primary-dark": "#0070F3",
-      }
+        transparent: "var(--color-transparent)",
+        bg: "var(--color-bg)",
+        "bg-secondary": "var(--color-bg-secondary)",
+        border: "var(--color-border)",
+        "border-secondary": "var(--color-border-secondary)",
+        accent: "var(--color-accent)",
+        "accent-dark": "var(--color-accent-dark)",
+        text: "var(--color-text)",
+        "text-secondary": "var(--color-text-secondary)",
+        "text-secondary-dark": "var(--color-text-secondary-dark)",
+        "text-secondary-hover": "var(--color-text-secondary-hover)",
+        "text-large": "var(--color-text-large)",
+        "bg-icon-button": "var(--color-bg-icon-button)",
+        "text-icon-button": "var(--color-bg-icon-button-text)",
+        "text-icon-button-dim": "var(--color-text-icon-button-dim)",
+        "bg-highlight": "var(--color-bg-highlight)",
+        "text-info-title": "var(--color-text-info-title)",
+        "bg-input": "var(--color-bg-input)",
+        "bg-chat-bubble": "var(--color-bg-chat-bubble)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

@@ -71,10 +71,10 @@ const NewGroupChatDialog = ({
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
           <div className="border-b border-slate-200/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+            <h2 className="text-base font-semibold leading-7 text-text">
               Create a group chat
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="mt-1 text-sm leading-6 text-text-secondary-dark">
               Create a group chat with more than 2 people.
             </p>
             <div className="mt-10 flex flex-col gap-y-8">
@@ -83,7 +83,7 @@ const NewGroupChatDialog = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="block text-sm font-medium leading-6 text-gray-900">
+                    <FormLabel className="block text-sm font-medium leading-6 text-text">
                       Name
                     </FormLabel>
                     <FormControl>
@@ -92,6 +92,7 @@ const NewGroupChatDialog = ({
                         placeholder="Group name"
                         autoComplete="off"
                         disabled={isLoading}
+                        className="!bg-bg-input"
                         {...field}
                       />
                     </FormControl>

@@ -29,8 +29,9 @@ const DesktopSidebarItem = ({
       <Link
         href={path || "#"}
         className={clsx(
-          `group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold text-gray-500 hover:text-black hover:bg-slate-100`,
-          active && "bg-slate-100 text-black"
+          `group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold text-gray-500 hover:text-text-large hover:bg-bg-highlight`,
+          active && "bg-bg-highlight text-text",
+          !active && "dark:hover:text-gray-500"
         )}
       >
         <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />

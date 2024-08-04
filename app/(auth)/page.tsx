@@ -33,7 +33,7 @@ export default function Page() {
 
   return (
     <div className="flex min-h-screen min-w-full justify-center">
-      <div className="flex-1 min-h-full flex-col justify-center py-16 px-8 lg:px-12 xl:px-24 bg-primary hidden lg:flex">
+      <div className="flex-1 min-h-full flex-col justify-center py-16 px-8 lg:px-12 xl:px-24 bg-accent hidden lg:flex">
         <h3 className="text-white text-3xl tracking-wide">
           <span className="font-light">nexu</span>
           <span className="font-bold">talk</span>

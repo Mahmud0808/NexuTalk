@@ -35,10 +35,10 @@ const AuthButton = ({
       onClick={handleClick}
       disabled={disabled}
       className={clsx(
-        `bg-primary hover:bg-primary-dark text-white`,
+        `bg-accent dark:bg-accent hover:bg-accent-dark dark:hover:bg-accent-dark text-white dark:text-white`,
         fullWidth && "w-full",
-        danger && "bg-red-500 hover:bg-red-600",
-        secondary && "text-slate-900 bg-white hover:bg-slate-100/80"
+        danger && "bg-red-500 dark:bg-red-500 hover:bg-red-600 dark:hover:bg-red-600",
+        secondary && "text-text bg-bg dark:bg-bg hover:bg-slate-100/80 dark:hover:bg-gray-900/80"
       )}
     >
       {children}

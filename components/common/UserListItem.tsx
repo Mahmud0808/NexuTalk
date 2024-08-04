@@ -29,11 +29,11 @@ const UserListItem = ({ data }: UserListItemProps) => {
       {isLoading && <LoadingDialog />}
       <div
         onClick={handleClick}
-        className="relative flex items-center space-x-3 rounded-lg p-2 cursor-pointer hover:bg-neutral-100"
+        className="relative flex items-center space-x-3 rounded-lg p-2 cursor-pointer hover:bg-bg-highlight"
       >
         <UserAvatar user={data} />
         <div className="min-w-0 flex-1">
-          <div className="truncate text-base font-semibold text-gray-900 mb-1">
+          <div className="truncate text-base font-semibold dark:font-medium text-text mb-1">
             {data.name}
           </div>
         </div>
