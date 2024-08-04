@@ -56,6 +56,7 @@ export async function POST(req: Request) {
         users: true,
         messages: {
           include: {
+            sender: true,
             seen: true,
           },
         },
@@ -69,7 +70,7 @@ export async function POST(req: Request) {
 
     updatedConversation.users.map((user) => {
       pusherServer.trigger(user?.email!, "conversation:update", {
-        id: conversationId?.id,
+        id: conversationId!.id,
         messages: [lastMessage],
       });
     });

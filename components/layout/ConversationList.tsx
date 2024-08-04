@@ -1,15 +1,16 @@
 "use client";
 
-import useConversation from "@/lib/hooks/useConversation.hooks";
-import { PopulatedConversationType } from "@/lib/types";
-import { MdOutlineGroupAdd } from "react-icons/md";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { MdOutlineGroupAdd } from "react-icons/md";
 import ConversationListItem from "../common/ConversationListItem";
 import { User } from "@prisma/client";
-import AlertDialog from "../common/AlertDialog";
 import NewGroupChatDialog from "./NewGroupChatDialog";
+import { pusherClient } from "@/lib/utility/pusher";
+import useConversation from "@/lib/hooks/useConversation.hooks";
+import { PopulatedConversationType } from "@/lib/types";
+import useConversationStore from "@/lib/store/conversationStore";
+import { useRouter } from "next/navigation";
 
 interface ConversationListProps {
   initialItems: PopulatedConversationType[];
@@ -22,10 +23,60 @@ const ConversationList = ({
   currentUser,
   users,
 }: ConversationListProps) => {
+  const {
+    conversations,
+    setConversations,
+    addConversation,
+    updateConversation,
+    deleteConversation,
+  } = useConversationStore();
+
   const router = useRouter();
-  const [items, setItems] = useState(initialItems);
   const { isOpen, conversationId } = useConversation();
   const [isModelOpen, setIsModelOpen] = useState(false);
+
+  useEffect(() => {
+    if (conversations.length === 0) {
+      setConversations(initialItems);
+    }
+  }, [initialItems]);
+
+  useEffect(() => {
+    pusherClient.subscribe(currentUser.email!);
+
+    const newConversationHandler = (
+      conversation: PopulatedConversationType
+    ) => {
+      addConversation(conversation);
+    };
+
+    const updateConversationHandler = (
+      conversation: PopulatedConversationType
+    ) => {
+      updateConversation(conversation);
+    };
+
+    const removeConversationHandler = (
+      conversation: PopulatedConversationType
+    ) => {
+      deleteConversation(conversation);
+
+      if (conversationId?.id === conversation.id) {
+        router.push("/conversations");
+      }
+    };
+
+    pusherClient.bind("conversation:new", newConversationHandler);
+    pusherClient.bind("conversation:update", updateConversationHandler);
+    pusherClient.bind("conversation:remove", removeConversationHandler);
+
+    return () => {
+      pusherClient.unsubscribe(currentUser.email!);
+      pusherClient.unbind("conversation:new", newConversationHandler);
+      pusherClient.unbind("conversation:update", updateConversationHandler);
+      pusherClient.unbind("conversation:remove", removeConversationHandler);
+    };
+  }, [currentUser?.email, router, conversationId?.id]);
 
   return (
     <>
@@ -36,7 +87,7 @@ const ConversationList = ({
       />
       <aside
         className={clsx(
-          "fixed w-full inset-y-0 pb-20 lg:pb-0 left-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200",
+          "fixed w-full inset-y-0 pb-20 lg:pb-0 left-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200 bg-white",
           isOpen ? "hidden" : "block"
         )}
       >
@@ -53,15 +104,18 @@ const ConversationList = ({
             </div>
           </div>
           <div className="flex flex-col space-y-1">
-            {items.map((item) => (
-              <ConversationListItem
-                key={item.id}
-                conversation={item}
-                currentUser={currentUser}
-                selected={conversationId?.id === item.id}
-              />
-            ))}
-            {items.length === 0 && (
+            {(conversations.length === 0 ? initialItems : conversations).map(
+              (item) => (
+                <ConversationListItem
+                  key={item.id}
+                  conversation={item}
+                  currentUser={currentUser}
+                  selected={conversationId?.id === item.id}
+                />
+              )
+            )}
+            {(conversations.length === 0 ? initialItems : conversations)
+              .length === 0 && (
               <div className="w-full h-full">
                 <p className="text-center mt-6">No conversations</p>
               </div>
