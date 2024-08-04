@@ -1,3 +1,4 @@
+import activeUsersStore from "@/lib/store/activeUsersStore";
 import { User } from "@prisma/client";
 import clsx from "clsx";
 import Image from "next/image";
@@ -5,9 +6,17 @@ import Image from "next/image";
 interface UserAvatarProps {
   user?: User;
   size?: "default" | "sm" | "lg" | "group_sm" | "group_lg";
+  showActiveStatus?: boolean;
 }
 
-const UserAvatar = ({ user, size = "default" }: UserAvatarProps) => {
+const UserAvatar = ({
+  user,
+  size = "default",
+  showActiveStatus = true,
+}: UserAvatarProps) => {
+  const { activeUsers } = activeUsersStore();
+  const isActive = activeUsers.includes(user?.email!);
+
   return (
     <div className="relative">
       <div
@@ -26,16 +35,18 @@ const UserAvatar = ({ user, size = "default" }: UserAvatarProps) => {
           src={user?.image || "/images/placeholder_profile_picture.png"}
         />
       </div>
-      <span
-        className={clsx(
-          "absolute block rounded-full bg-green-500 ring-2 ring-white",
-          size === "default" && "h-2 w-2 md:h-[9px] md:w-[9px] top-0 right-0",
-          size === "sm" && "h-1 w-1 md:h-[6px] md:w-[6px] top-0 right-0",
-          size === "lg" &&
-            "h-2 w-2 md:h-[10px] md:w-[10px] top-[6px] right-[6px]",
-          (size === "group_sm" || size === "group_lg") && "hidden"
-        )}
-      />
+      {showActiveStatus && isActive && (
+        <span
+          className={clsx(
+            "absolute block rounded-full bg-green-500 ring-2 ring-white",
+            size === "default" && "h-2 w-2 md:h-[9px] md:w-[9px] top-0 right-0",
+            size === "sm" && "h-1 w-1 md:h-[6px] md:w-[6px] top-0 right-0",
+            size === "lg" &&
+              "h-2 w-2 md:h-[10px] md:w-[10px] top-[6px] right-[6px]",
+            (size === "group_sm" || size === "group_lg") && "hidden"
+          )}
+        />
+      )}
     </div>
   );
 };

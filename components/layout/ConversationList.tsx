@@ -7,10 +7,10 @@ import ConversationListItem from "../common/ConversationListItem";
 import { User } from "@prisma/client";
 import NewGroupChatDialog from "./NewGroupChatDialog";
 import { pusherClient } from "@/lib/utility/pusher";
-import useConversation from "@/lib/hooks/useConversation.hooks";
 import { PopulatedConversationType } from "@/lib/types";
 import useConversationStore from "@/lib/store/conversationStore";
 import { useRouter } from "next/navigation";
+import useConversation from "@/lib/hooks/useConversation.hooks";
 
 interface ConversationListProps {
   initialItems: PopulatedConversationType[];
@@ -36,7 +36,10 @@ const ConversationList = ({
   const [isModelOpen, setIsModelOpen] = useState(false);
 
   useEffect(() => {
-    if (conversations.length === 0) {
+    if (
+      conversations.length === 0 ||
+      initialItems.length > conversations.length
+    ) {
       setConversations(initialItems);
     }
   }, [initialItems]);

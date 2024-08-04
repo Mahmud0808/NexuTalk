@@ -6,6 +6,7 @@ import { Conversation, User } from "@prisma/client";
 import { useMemo } from "react";
 import { format } from "date-fns/format";
 import GroupAvatar from "../common/GroupAvatar";
+import activeUsersStore from "@/lib/store/activeUsersStore";
 
 interface ChatDrawerBodyProps {
   otherUsers: User[];
@@ -22,6 +23,10 @@ const ChatDrawerBody = ({
   onClose,
   onDelete,
 }: ChatDrawerBodyProps) => {
+  const { activeUsers } = activeUsersStore();
+  const isActive =
+    !conversation.isGroup && activeUsers.includes(otherUsers[0]?.email!);
+
   const joinedDate = useMemo(() => {
     return format(new Date(otherUsers[0].createdAt), "PP");
   }, [otherUsers[0].createdAt]);
@@ -35,8 +40,8 @@ const ChatDrawerBody = ({
       return `${conversation.users.length} members`;
     }
 
-    return "Active";
-  }, [conversation]);
+    return isActive ? "Active" : "Offline";
+  }, [conversation, isActive]);
 
   const handleClose = () => {
     if (onClose) {

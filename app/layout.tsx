@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import AuthContext from "@/components/context/AuthContext";
+import ActiveStatus from "@/components/common/ActiveStatus";
 
 const poppins = Poppins({
   weight: ["200", "300", "400", "500", "600", "700"],
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <AuthContext>
+          <ActiveStatus />
           <main className="h-full">{children}</main>
           <Toaster />
         </AuthContext>

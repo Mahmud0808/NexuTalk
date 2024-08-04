@@ -8,6 +8,7 @@ import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
 import UserAvatar from "../common/UserAvatar";
 import ChatDrawer from "./ChatDrawer";
 import GroupAvatar from "../common/GroupAvatar";
+import activeUsersStore from "@/lib/store/activeUsersStore";
 
 interface ChatHeaderProps {
   conversation: Conversation & {
@@ -18,18 +19,22 @@ interface ChatHeaderProps {
 
 const ChatHeader = ({ conversation, currentUser }: ChatHeaderProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
   const otherUsers = useOtherUsers({
     conversation: conversation,
     excludedUser: currentUser,
   });
+
+  const { activeUsers } = activeUsersStore();
+  const isActive = activeUsers.includes(otherUsers[0]?.email!);
 
   const statusText = useMemo(() => {
     if (conversation.isGroup) {
       return `${conversation.users.length} members`;
     }
 
-    return "Active";
-  }, [conversation]);
+    return isActive ? "Active" : "Offline";
+  }, [conversation, isActive]);
 
   return (
     <>

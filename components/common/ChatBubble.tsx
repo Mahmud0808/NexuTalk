@@ -38,8 +38,13 @@ const ChatBubble = ({
         isOwnMessage ? "justify-end" : "justify-start"
       )}
     >
-      <div className={clsx("flex-shrink-0", isOwnMessage && "hidden")}>
-        <UserAvatar user={data.sender} size="sm" />
+      <div
+        className={clsx(
+          "flex-shrink-0",
+          (isOwnMessage || !isGroup) && "hidden"
+        )}
+      >
+        <UserAvatar user={data.sender} size="sm" showActiveStatus={false} />
       </div>
       <div
         className={clsx(

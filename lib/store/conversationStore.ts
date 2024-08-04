@@ -26,6 +26,22 @@ const useConversationStore = create<ConversationState>((set) => ({
         };
       }
 
+      const duplicate = state.conversations.find(
+        (c) =>
+          !c.isGroup &&
+          c.users[0] === conversation.users[0] &&
+          c.users[1] === conversation.users[1]
+      );
+
+      if (duplicate) {
+        return {
+          conversations: sortConversations([
+            ...state.conversations.filter((c) => c.id !== duplicate.id),
+            conversation,
+          ]),
+        };
+      }
+
       return {
         conversations: sortConversations([
           ...state.conversations,
