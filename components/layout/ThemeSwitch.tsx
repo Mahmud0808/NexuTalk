@@ -17,7 +17,7 @@ export default function ThemeSwitch({ showText = false }: ThemeSwitchProps) {
       type="button"
       className={clsx(
         "min-w-0 min-h-0 w-auto h-auto group flex gap-x-3 rounded-full p-3 text-sm leading-6 font-semibold text-gray-500 hover:bg-bg-highlight hover:text-black dark:hover:text-gray-500",
-        showText && "hover:bg-transparent !p-0 dark:hover:!text-gray-400"
+        showText && "hover:bg-transparent !p-3 dark:hover:!text-gray-400 !bg-bg-input !h-10 items-center !rounded-md !border !border-slate-200 dark:!border-slate-800 !w-fit"
       )}
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >

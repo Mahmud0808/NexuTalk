@@ -134,7 +134,7 @@ const SettingsDialog = ({
                   </FormItem>
                 )}
               />
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 lg:hidden">
                 <div className="block text-sm font-medium leading-6 text-text">
                   Theme
                 </div>
@@ -142,8 +142,8 @@ const SettingsDialog = ({
               </div>
             </div>
           </div>
-          <div className="mt-6 flex items-center justify-end max-sm:justify-between gap-x-3">
-            <div className="inline-block sm:hidden">
+          <div className="mt-6 flex items-center justify-end max-lg:justify-between gap-x-3">
+            <div className="inline-block lg:hidden">
               <AuthButton
                 secondary
                 type="button"
@@ -153,7 +153,7 @@ const SettingsDialog = ({
                 Log out
               </AuthButton>
             </div>
-            <div className="inline-block max-sm:hidden">
+            <div className="inline-block max-lg:hidden">
               <AuthButton
                 secondary
                 type="button"
