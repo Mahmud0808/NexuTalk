@@ -139,6 +139,15 @@ Replace the placeholder values with your actual credentials. You can obtain thes
 
   - Get the environment variables from App Keys page.
 
+### Setting up Database
+
+Run the following commands in terminal:
+
+```bash
+npx prisma db push
+npx prisma generate
+```
+
 ### Running the Project
 
 ```bash
