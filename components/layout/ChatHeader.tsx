@@ -48,7 +48,7 @@ const ChatHeader = ({ conversation, currentUser }: ChatHeaderProps) => {
         <div className="flex gap-3 items-center">
           <Link
             href="/conversations"
-            className="block lg:hidden text-gray-500 hover:text-gray-700 dark:hover:text-gray-600 transition cursor-pointer"
+            className="block lg:hidden text-gray-500 hover:text-gray-700 dark:hover:text-gray-400 transition cursor-pointer"
           >
             <HiChevronLeft size={32} />
           </Link>
@@ -67,7 +67,7 @@ const ChatHeader = ({ conversation, currentUser }: ChatHeaderProps) => {
         <HiEllipsisHorizontal
           size={32}
           onClick={() => setDrawerOpen(true)}
-          className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-600 transition cursor-pointer xl:hidden"
+          className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-400 transition cursor-pointer xl:hidden"
         />
       </div>
     </>

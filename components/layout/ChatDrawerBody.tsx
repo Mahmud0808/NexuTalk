@@ -57,7 +57,7 @@ const ChatDrawerBody = ({
             {onClose && (
               <button
                 type="button"
-                className="rounded-md text-gray-500 hover:text-gray-700 dark:hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent"
+                className="rounded-md text-gray-500 hover:text-gray-700 dark:hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent"
                 onClick={handleClose}
               >
                 <span className="sr-only">Close panel</span>
