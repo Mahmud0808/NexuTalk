@@ -89,7 +89,12 @@ const SettingsDialog = ({
                 <label className="block text-sm font-medium leading-6 text-text">
                   Photo
                 </label>
-                <div className="mt-2 flex items-center gap-x-3">
+                <CldUploadButton
+                  options={{ maxFiles: 1 }}
+                  onSuccess={handleUpload}
+                  uploadPreset="NexuTalk"
+                  className="mt-2 flex items-center gap-x-3"
+                >
                   <div className="relative inline-block h-24 w-24 overflow-hidden rounded-full">
                     <Image
                       fill
@@ -101,16 +106,10 @@ const SettingsDialog = ({
                       alt="Avatar"
                     />
                   </div>
-                  <CldUploadButton
-                    options={{ maxFiles: 1 }}
-                    onSuccess={handleUpload}
-                    uploadPreset="NexuTalk"
-                  >
-                    <AuthButton secondary type="button" disabled={isLoading}>
-                      Change
-                    </AuthButton>
-                  </CldUploadButton>
-                </div>
+                  <AuthButton secondary type="button" disabled={isLoading}>
+                    Change
+                  </AuthButton>
+                </CldUploadButton>
               </div>
               <FormField
                 control={form.control}
