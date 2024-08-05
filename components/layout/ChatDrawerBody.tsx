@@ -57,7 +57,7 @@ const ChatDrawerBody = ({
             {onClose && (
               <button
                 type="button"
-                className="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent"
+                className="rounded-md text-gray-500 hover:text-gray-700 dark:hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent"
                 onClick={handleClose}
               >
                 <span className="sr-only">Close panel</span>
@@ -85,10 +85,10 @@ const ChatDrawerBody = ({
               onClick={onDelete}
               className="flex flex-col gap-2 items-center cursor-pointer group"
             >
-              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-bg-highlight group-hover:bg-neutral-200 dark:group-hover:bg-gray-600 transition">
+              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-bg-highlight group-hover:scale-110 transition">
                 <IoTrash size={20} />
               </div>
-              <div className="text-sm font-light dark:font-normal text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-800 dark:group-hover:text-gray-200 transition">
+              <div className="text-sm font-light dark:font-normal text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-500 transition">
                 Delete
               </div>
             </div>

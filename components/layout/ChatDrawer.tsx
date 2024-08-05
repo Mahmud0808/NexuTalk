@@ -63,7 +63,7 @@ const ChatDrawer = ({
                 leaveTo="translate-x-full"
               >
                 <DialogPanel className="pointer-events-auto w-screen max-w-md">
-                  <div className="h-full bg-white py-6 shadow-xl">
+                  <div className="h-full bg-bg py-6 shadow-xl">
                     <ChatDrawerBody
                       data={conversation}
                       otherUsers={otherUsers}
