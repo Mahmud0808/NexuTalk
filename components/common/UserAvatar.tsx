@@ -39,7 +39,7 @@ const UserAvatar = ({
         <span
           className={clsx(
             "absolute block rounded-full bg-green-500 ring-2 ring-white",
-            size === "default" && "h-2 w-2 md:h-[9px] md:w-[9px] top-0 right-0",
+            size === "default" && "h-[6px] w-[6px] md:h-[9px] md:w-[9px] top-0 right-0",
             size === "sm" && "h-1 w-1 md:h-[6px] md:w-[6px] top-0 right-0",
             size === "lg" &&
               "h-2 w-2 md:h-[10px] md:w-[10px] top-[6px] right-[6px]",
