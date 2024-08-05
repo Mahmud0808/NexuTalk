@@ -2,10 +2,14 @@ import { usePathname } from "next/navigation";
 import useConversation from "./useConversation.hooks";
 import { useMemo } from "react";
 import { HiChat } from "react-icons/hi";
-import { HiUsers, HiArrowLeftOnRectangle } from "react-icons/hi2";
-import { signOut } from "next-auth/react";
+import { HiUsers } from "react-icons/hi2";
+import { MdSettings } from "react-icons/md";
 
-const useRoutes = () => {
+interface MobileRouteProps {
+  onSettingsClick: () => void;
+}
+
+const useMobileRoutes = ({ onSettingsClick }: MobileRouteProps) => {
   const pathname = usePathname();
   const { conversationId } = useConversation();
 
@@ -24,10 +28,10 @@ const useRoutes = () => {
         active: pathname === "/users",
       },
       {
-        label: "Logout",
+        label: "Settings",
         path: "#",
-        icon: HiArrowLeftOnRectangle,
-        onClick: () => signOut(),
+        icon: MdSettings,
+        onClick: () => onSettingsClick(),
       },
     ],
     [pathname, conversationId]
@@ -36,4 +40,4 @@ const useRoutes = () => {
   return routes;
 };
 
-export default useRoutes;
+export default useMobileRoutes;

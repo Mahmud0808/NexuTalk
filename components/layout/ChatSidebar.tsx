@@ -24,7 +24,7 @@ export default async function ChatSidebar({
           conversation={conversation}
         />
       )}
-      <MobileNavbar />
+      <MobileNavbar currentUser={currentUser!} />
       <main className="lg:pl-20 h-full">{children}</main>
     </div>
   );

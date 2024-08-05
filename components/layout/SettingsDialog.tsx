@@ -16,6 +16,8 @@ import UserAvatar from "../common/UserAvatar";
 import Image from "next/image";
 import { CldUploadButton } from "next-cloudinary";
 import AuthButton from "../common/AuthButton";
+import { signOut } from "next-auth/react";
+import ThemeSwitch from "./ThemeSwitch";
 
 interface SettingsDialogProps {
   currentUser: User;
@@ -132,17 +134,35 @@ const SettingsDialog = ({
                   </FormItem>
                 )}
               />
+              <div className="flex flex-col gap-2">
+                <div className="block text-sm font-medium leading-6 text-text">
+                  Theme
+                </div>
+                <ThemeSwitch showText />
+              </div>
             </div>
           </div>
-          <div className="mt-6 flex items-center justify-end gap-x-3">
-            <AuthButton
-              secondary
-              type="button"
-              onClick={onClose}
-              disabled={isLoading}
-            >
-              Cancel
-            </AuthButton>
+          <div className="mt-6 flex items-center justify-end max-sm:justify-between gap-x-3">
+            <div className="inline-block sm:hidden">
+              <AuthButton
+                secondary
+                type="button"
+                onClick={signOut}
+                disabled={isLoading}
+              >
+                Log out
+              </AuthButton>
+            </div>
+            <div className="inline-block max-sm:hidden">
+              <AuthButton
+                secondary
+                type="button"
+                onClick={onClose}
+                disabled={isLoading}
+              >
+                Cancel
+              </AuthButton>
+            </div>
             <AuthButton type="submit" disabled={isLoading}>
               Save
             </AuthButton>
