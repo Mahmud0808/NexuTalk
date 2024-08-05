@@ -13,7 +13,7 @@ const MobileNavbar = () => {
   }
 
   return (
-    <div className="fixed justify-between w-full bottom-0 z-40 flex items-center bg-white border-t-[1px] lg:hidden">
+    <div className="fixed justify-between w-full bottom-0 z-40 flex items-center bg-bg border-t-[1px] border-border lg:hidden">
       {routes.map((item) => (
         <MobileNavbarItem
           key={item.label}
