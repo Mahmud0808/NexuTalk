@@ -15,7 +15,7 @@
     <img src="https://img.shields.io/badge/-Pusher-black?style=for-the-badge&logoColor=white&logo=pusher&color=361A59" alt="pusher" />
   </div>
 
-  <h2 align="center">Quirklr</h2>
+  <h2 align="center">NexuTalk</h2>
 
   <div align="center">
      <b>NexuTalk</b> is a real-time chatting platform built with cutting-edge technologies, offering seamless communication with a modern UI. It supports features such as group conversations, single conversations, online status, responsive design for various devices, image sharing, and dark/light mode.
