@@ -107,6 +107,11 @@ const ConversationList = ({
             </div>
           </div>
           <div className="flex flex-col space-y-1">
+            {initialItems.length === 0 && conversations.length === 0 && (
+              <div className="text-text-secondary text-center text-sm">
+                No chat available
+              </div>
+            )}
             {(conversations.length === 0 ? initialItems : conversations).map(
               (item) => (
                 <ConversationListItem
